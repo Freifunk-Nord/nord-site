@@ -25,9 +25,10 @@ GLUON_SITE_PACKAGES := \
 	haveged
 
 
-DEFAULT_GLUON_RELEASE := 0.6-stable
+DEFAULT_GLUON_RELEASE := 0.6
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
+GLUON_BRANCH = stable
