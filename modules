@@ -1,4 +1,4 @@
 GLUON_SITE_FEEDS='ffki_gluon_packages'
 
-PACKAGES_FFKI_PACKAGES_REPO=http://git.freifunk.in-kiel.de/ffki-gluon-packages
-PACKAGES_FFKI_PACKAGES_COMMIT=7d2dab8b25aa436b7f12b1e5966c8f6c23d166c7
+PACKAGES_FFKI_GLUON_PACKAGES_REPO=http://git.freifunk.in-kiel.de/ffki-gluon-packages
+PACKAGES_FFKI_GLUON_PACKAGES_COMMIT=7d2dab8b25aa436b7f12b1e5966c8f6c23d166c7
