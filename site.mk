@@ -3,6 +3,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-alfred \
 	gluon-announced \
 	gluon-autoupdater \
+	gluon-setup-mode \
+	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-hostname \
 	gluon-config-mode-mesh-vpn \
@@ -31,8 +33,8 @@ DEFAULT_GLUON_RELEASE := 0.7-exp
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH = experimental
+GLUON_BRANCH ?= experimental
 export GLUON_BRANCH
 
-GLUON_TARGET = ar71xx-generic
+GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
