@@ -37,3 +37,5 @@ export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
+
+GLUON_LANGS ?= en de
