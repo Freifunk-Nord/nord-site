@@ -45,6 +45,7 @@ USB_PACKAGES_BASIC := \
 	kmod-usb2
 # FAT32 Support for USB
 USB_PACKAGES := $(USB_PACKAGES_BASIC) \
+    usbutils \
     block-mount \
     kmod-fs-ext4 \
     kmod-fs-vfat \
