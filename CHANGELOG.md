@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 0.8.1 basierdend auf Gluon 2016.1
+Änderungen mit Firmwareversion 0.8.1 basierend auf Gluon 2016.1
 ================================================================
 
 Alle Neuerungen der an Gluon können hier eingesehen werden: https://gluon.readthedocs.org/en/latest/releases/v2016.1.html#new-features
