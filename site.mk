@@ -73,7 +73,7 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		kmod-usb-hid \
 		kmod-usb-net \
 		kmod-usb-net-asix \
-		kmod-usb-net-dm9601-ether \
+		kmod-usb-net-dm9601-ether
 endif
 
 ifeq ($(GLUON_TARGET),ar71xx-generic)
