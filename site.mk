@@ -45,7 +45,7 @@ USB_PACKAGES_BASIC := \
 	kmod-usb2
 # FAT32 Support for USB
 USB_PACKAGES := $(USB_PACKAGES_BASIC) \
-	block-mount \
+    block-mount \
     kmod-fs-ext4 \
     kmod-fs-vfat \
     kmod-usb-storage  \
@@ -74,7 +74,6 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		kmod-usb-net \
 		kmod-usb-net-asix \
 		kmod-usb-net-dm9601-ether \
-		kmod-usb2
 endif
 
 ifeq ($(GLUON_TARGET),ar71xx-generic)
