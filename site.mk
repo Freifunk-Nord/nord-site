@@ -25,13 +25,15 @@ GLUON_SITE_PACKAGES := \
 	haveged
 
 
-DEFAULT_GLUON_RELEASE := 0.16.1
+# Always call `make` from the command line with the desired release version!
+# otherwise this is generated:
+DEFAULT_GLUON_RELEASE := 0.16.0~exp$(shell date '+%y%m%d%H%M')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= stable
+GLUON_BRANCH ?= experimental
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
