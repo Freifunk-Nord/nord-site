@@ -70,6 +70,7 @@ Ein Image für XEN Virtualisierung wird nun standardmäßig mit ausgeworfen.
 Die x86 64Bit Architektur wird jetzt unterstützt. Dieses Image kann ebenfalls für KVM mit VirtIO genutzt werden.
 
 Offizielle Changelogs zum nachlesen:
+------------------------------------
 
 * https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
 * https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
