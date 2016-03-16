@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 0.8.1 basierend auf Gluon 2016.1
+Änderungen mit Firmwareversion 2016.1.2 basierend auf Gluon 2016.1.2
 ================================================================
 
 Alle Neuerungen der an Gluon können hier eingesehen werden: https://gluon.readthedocs.org/en/latest/releases/v2016.1.html#new-features
@@ -7,12 +7,13 @@ Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
  * site.conf wurde an das neue Layout für Gluon 2016.1 angepasst
- * http://openwrt.draic.info wurde als OPKG Repository hinzugefügt. Damit ist opkg auf den Nodes nutzbar
+ * Ein OPKG Repository wurde auf Gateway 2 angelegt. Damit ist opkg auf den Nodes nutzbar
  * Neue NTP Server
  * vorhandene Server sind nun erreichbar
  * Next-node IP Fehler beseitigt. Der Node ist nun einheitlich unter IPv4 = '10.187.254.254' oder IPv6 = '2a03:2267:4e6f:7264::ffff' erreichbar.
  * Alle Nodes bauen nun noch Verbindung zu einem Gateway auf. Das reduziert das Hintergrundrauschen um 50%.
  * VPN1 - fastd Key aktualisiert.
+ * damit ist Gateway 1 nun für alle nutzbar
  * URLs für die Autoupdateserver hinterlegt.
  * Autoupdate Server (VPN0) ist nun auch via IPv4 erreichbar.
  * Firmware Signatur von Tarnatos hinzugefügt.
@@ -20,7 +21,7 @@ Freifunk Nord spezifische Änderungen:
  * Freifunk Router mit ausreichend Flash und USB haben nun eine aktive USB Unterstützung.
  * Angepasste Firmware für den Futro S550 wird nun auf den Updateservern bereitgestellt.
 
-Generelle Änderungen an Gluon 2016.1
+Generelle Änderungen an Gluon 2016.1.2
 ------------------------------------
 
  * Update auf OpenWRT 15.05 "Chaos Clamer"
@@ -30,6 +31,7 @@ Generelle Änderungen an Gluon 2016.1
  * Die Kanalbreite im 2,4Ghz Band wurde auf 20Mhz begrenzt. Dadurch werden andere 2,4Ghz Netz weniger stark beeinflusst.
  * (das AdHoc MESH arbeitet nun auch nach dem 802.11s Standard. Noch in Entwicklung) - in FFNord nicht implementiert.
  * Wechsel von gluon-cron zu micrond.
+ * Verbesserter Ubiquiti Support. Ubiquiti Geräte mit Firmwareversion 5.6 oder höher brauchen nun nicht mehr auf 5.5 downgegraded werden. Die Freifunkfirmware kann direkt mit der "factory" Version aufgespielt werden ohne das Gerät zu bricken.
 
 Mehr Routermodelle werden unterstützt
 -------------------------------------
@@ -47,6 +49,10 @@ Mehr Routermodelle werden unterstützt
         TL-WR940N v1, v2, v3
         TL-WR941ND v6
         TL-WR1043N/ND v3
+        TL-MR13U v1
+    
+    Onion
+        Omega
 
     Ubiquiti
         airGateway
@@ -61,4 +67,10 @@ Mehr Routermodelle werden unterstützt
 Ein Image für XEN Virtualisierung wird nun standardmäßig mit ausgeworfen.
 
  * x86-64
-Die x86 64Bit Architektur wird jetzt unterstützt. Dieses Image kann ebenfalls für KVM mit WirtIO genutzt werden.
+Die x86 64Bit Architektur wird jetzt unterstützt. Dieses Image kann ebenfalls für KVM mit VirtIO genutzt werden.
+
+Offizielle Changelogs zum nachlesen:
+
+* https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
+* https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
+* https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
