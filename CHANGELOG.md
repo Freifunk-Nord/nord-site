@@ -1,8 +1,6 @@
 Änderungen mit Firmwareversion 0.16.2 basierend auf Gluon 2016.1.2
 ================================================================
 
-Alle Neuerungen der an Gluon können hier eingesehen werden: https://gluon.readthedocs.org/en/latest/releases/v2016.1.html#new-features
-
 Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
