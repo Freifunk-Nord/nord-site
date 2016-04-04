@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 0.16.2 basierend auf Gluon 2016.1.2
+Änderungen mit Firmwareversion 0.16.3 basierend auf Gluon 2016.1.3
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
@@ -17,10 +17,25 @@ Freifunk Nord spezifische Änderungen:
  * Firmware Signatur von Tarnatos hinzugefügt.
  * Firmware Signatur von rubo77 hinzugefügt.
  * Freifunk Router mit ausreichend Flash und USB haben nun eine aktive USB Unterstützung.
- * Angepasste Firmware für den Futro S550 wird nun auf den Updateservern bereitgestellt.
+ * Slots für insg. 15 mögliche Gateways eingefügt
+ * Autoupdate Branch wird durch dieses Firmware Update auf "stable" geändert.
+
+Generelle Änderungen an Gluon 2016.1.3
+--------------------------------------
+* Der Fehler der in Version 2016.1.2 wahrlos defekte Images erzeugte, ist nun behoben.
+* Sysupgradeprozess bei XEN Images repariert.
+* Gluon kann nun auf Systemen gebaut werden, die LibreSSL statt OpenSSL verwenden
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    Alfa
+        Hornet UB / AP121 / AP121U
+    TP-Link
+        TL-WA7510N
 
 Generelle Änderungen an Gluon 2016.1.2
-------------------------------------
+--------------------------------------
 
  * Update auf OpenWRT 15.05 "Chaos Clamer"
  * Die Router-Statusseite unter http://[2a03:2267:4e6f:7264::ffff] wurde komplett überarbeitet und zeigt nun umfangreiche Statistiken an
@@ -73,3 +88,4 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
 * https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
 * https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
+* https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
