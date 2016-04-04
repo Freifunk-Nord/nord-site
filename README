@@ -1,5 +1,72 @@
 Doku: https://gluon.readthedocs.org/en/latest/releases/v2016.1.3.html
 
-Gluon versions used for specific Freifunk Nord Firmware builds:
+Gluon Version auf der die Freifunk Nord Firmware basiert:
 
 * 0.16.3 - Gluon 2016.1.3
+
+Download der Firmware:
+
+* https://ffnord.net/firmware.html
+
+Firmware selber bauen:
+
+1. Vorbereitung:
+1.1 Abhängigkeiten installieren
+
+```
+sudo apt-get install git subversion build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev
+```
+
+1.2 Gluon repo clonen
+```
+cd /opt/
+git clone https://github.com/freifunk-gluon/gluon
+```
+
+1.3 FFNord Site clonen
+```
+git clone https://github.com/ffnord/nord-site.git site
+```
+
+2. Firmware bauen 
+2.1 Build vorbereiten
+```
+make update
+```
+
+2.2 Build durchführen
+```
+make -j8 GLUON_TARGET=ar71xx-generic
+```
+
+Mögliche Targets:
+```
+GLUON_TARGET=ar71xx-generic
+GLUON_TARGET=ar71xx-nand
+GLUON_TARGET=mpc85xx-generic
+GLUON_TARGET=x86-generic
+GLUON_TARGET=x86-kvm_guest
+GLUON_TARGET=x86-64
+GLUON_TARGET=x86-xen_domu
+```
+
+3. Rebuild
+3.1 Updaten
+```
+cd /opt/gluon/site
+git pull
+cd ..
+git pull
+make update
+```
+3.2 Build Verzeichnis säubern
+```
+make clean GLUON_TARGET=ar71xx-generic
+make clean GLUON_TARGET=ar71xx-nand
+make clean GLUON_TARGET=mpc85xx-generic
+make clean GLUON_TARGET=x86-generic
+make clean GLUON_TARGET=x86-kvm_guest
+make clean GLUON_TARGET=x86-64
+make clean GLUON_TARGET=x86-xen_domu
+```
+
