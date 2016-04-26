@@ -20,7 +20,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
-#	gluon-au-change \ #Dieses Gluon Paket wechselt den Autoupdater Branch von experimental auf stable
+#	gluon-au-change \
 	iwinfo \
 	iptables \
 	haveged
