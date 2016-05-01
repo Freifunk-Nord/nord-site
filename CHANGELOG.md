@@ -18,7 +18,7 @@ Mehr Routermodelle werden unterstützt
 
     ar71xx-generic
         8devices Carambola 2
-	Meraki MR12/MR62/MR16/MR66
+        Meraki MR12/MR62/MR16/MR66
 
 
 Offizielle Changelogs zum nachlesen:
