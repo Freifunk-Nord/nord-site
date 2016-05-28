@@ -25,6 +25,11 @@ Mehr Routermodelle werden unterstützt
         OpenMesh MR600 (v1, v2), MR900 (v1, v2), OM2P (v1, v2), OM2P-HS (v1, v2), OM2P-LC, OM5P, OM5P-AN
         Ubiquiti Rocket M XW
         TP-Link WR841N/ND (v11)
+        
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.org/en/v2016.1.5/releases/v2016.1.5.html
 
 Generelle Änderungen an Gluon 2016.1.4
 --------------------------------------
