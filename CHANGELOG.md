@@ -1,10 +1,29 @@
-Änderungen mit Firmwareversion 0.16.4 basierend auf Gluon 2016.1.4
+Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
- * keine
+ * Es wurde ein neuer Autoupdaterbranch "early bird" eingeführt. Dieser kann genutzt werden, um Firmwareupdates direkt nach dem erscheinen automatisch zu beziehen. Im early Branch werden untested experimental Firmware Versionen ausgeliefert. Wer diesen nutzt, sollte sich daher im klaren sein, dass ggf. Probleme auftreten können.
+ * das Gluon Paket fastd-traffic-status wurde eingefügt, um Traffic Statistiken in Grafana auszuwerten.
+
+Generelle Änderungen an Gluon 2016.1.5
+--------------------------------------
+ * Es wurde ein Fehler behoben, der zu Problemen beim nacheinander kompilieren mehrerer Gluon Targets führte.
+ * Es wurde ein Fehler behoben, der zu Problemen beim kompilieren von Gluon zu der Fehlermeldung "recursive dependency" führte.
+ * Gluon kann nun mit GCC6 kompiliert werden.
+ * Es wurde ein Fehler behoben, welcher batman-adv daran hinderte korrekt mit VLANs zu funktionieren.
+ * Ein Fehler in Gluon 2016.1.4 verhinderte die Funktion von auf ath10k Chipsätzen basierenden Endgeräten. Dieser wurde behoben. 
+ * Gluon kann nun auf allen unterstützten Ubiquiti Geräten installiert werden, ohne zuvor auf AirOS 5.5 downzugraden.
+ * Leerzeichen werden nun automatisch aus der Geolokalisierung entfernt und die Kompatiblität zu respondd damit verbessert.
+ 
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        OpenMesh MR600 (v1, v2), MR900 (v1, v2), OM2P (v1, v2), OM2P-HS (v1, v2), OM2P-LC, OM5P, OM5P-AN
+        Ubiquiti Rocket M XW
+        TP-Link WR841N/ND (v11)
 
 Generelle Änderungen an Gluon 2016.1.4
 --------------------------------------
@@ -119,3 +138,5 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
 * https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
 * https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
+* https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
+* https://gluon.readthedocs.org/en/v2016.1.5/releases/v2016.1.5.html
