@@ -5,6 +5,7 @@ Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
  * Es wurde ein neuer Autoupdaterbranch "early bird" eingeführt. Dieser kann genutzt werden, um Firmwareupdates direkt nach dem erscheinen automatisch zu beziehen. Im early Branch werden untested experimental Firmware Versionen ausgeliefert. Wer diesen nutzt, sollte sich daher im klaren sein, dass ggf. Probleme auftreten können.
+ * Es wurde ein neuer Autoupdaterbranch "ownbuild" eingeführt. Dieser kann genutzt werden, wenn ein Node Updates in eigener Zuständigkeit erhalten soll. Somit ist für Administratoren ersichtlich, dass ein Node über eine selbst erstellte Firmware verfügt. Dies ist gerade dann wichtig zu wissen, wenn der Erfolg/Misserfolg eines Rollouts bewerten werden soll.
  * das Gluon Paket fastd-traffic-status wurde eingefügt, um Traffic Statistiken in Grafana auszuwerten.
 
 Generelle Änderungen an Gluon 2016.1.5
