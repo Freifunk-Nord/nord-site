@@ -22,21 +22,20 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 #	gluon-au-change \
 	iwinfo \
+	fastd-traffic-status \
 	iptables \
 	haveged
 
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 0.10~exp$(shell date '+%y%m%d%H%M')
-#DEFAULT_GLUON_RELEASE := 0.16.4
+DEFAULT_GLUON_RELEASE := 0.16.5~exp$(shell date '+%y%m%d%H%M')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
 GLUON_BRANCH ?= experimental
-#GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
