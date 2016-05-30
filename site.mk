@@ -1,7 +1,7 @@
 GLUON_SITE_PACKAGES := \
 	gluon-mesh-batman-adv-14 \
 	gluon-alfred \
-	gluon-announced \
+	gluon-respondd \
 	gluon-autoupdater \
 	gluon-setup-mode \
 	gluon-config-mode-core \
@@ -25,13 +25,15 @@ GLUON_SITE_PACKAGES := \
 	haveged
 
 
-DEFAULT_GLUON_RELEASE := 0.7.2
+# Always call `make` from the command line with the desired release version!
+# otherwise this is generated:
+DEFAULT_GLUON_RELEASE := 0.16.0~exp$(shell date '+%y%m%d%H%M')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= stable
+GLUON_BRANCH ?= experimental
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
@@ -84,6 +86,7 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_TLWR2543_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_WRT160NL_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_DIR825B1_SITE_PACKAGES := $(USB_PACKAGES)
+	GLUON_DIR505A1_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_GLINET_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_WNDR3700_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_WZRHPG450H_SITE_PACKAGES := $(USB_PACKAGES)
