@@ -1,3 +1,33 @@
+Änderungen mit Firmwareversion 0.16.4 basierend auf Gluon 2016.1.4
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+
+ * keine
+
+Generelle Änderungen an Gluon 2016.1.4
+--------------------------------------
+ * Der WLAN Treiber aller unterstützen Router wurde auf eine neuere Version aktualisiert. Dadurch wurde die Stabilität bei vielen Routern verbessert
+ * Es wurde ein Fehler behoben der zu Problemen beim kompilieren von Gluon mit der Option -jx führte
+ * Der Fehler “Too many levels of symbolic links” der bei kompilieren von Gluon auftrat ist nun behoben
+ * Weitere Optimierungen beim kompilieren von Gluon
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        8devices Carambola 2
+        Meraki MR12/MR62/MR16/MR66
+
+
+Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
+
+
+
 Änderungen mit Firmwareversion 0.16.3 basierend auf Gluon 2016.1.3
 ================================================================
 
