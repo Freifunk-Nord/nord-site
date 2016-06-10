@@ -1,3 +1,12 @@
+Änderungen mit Firmwareversion 0.16.6 basierend auf Gluon 2016.x.x
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+
+ * Modules Path in der site.conf hinterlegt.
+ * 
+
 Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
 
