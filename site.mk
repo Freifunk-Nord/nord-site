@@ -20,7 +20,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
-#	gluon-au-change \
 	iwinfo \
 	fastd-traffic-status \
 	iptables \
@@ -49,26 +48,26 @@ USB_PACKAGES_BASIC := \
 	kmod-usb2
 # FAT32 Support for USB
 USB_PACKAGES := $(USB_PACKAGES_BASIC) \
-    block-mount \
-    kmod-fs-ext4 \
-    kmod-fs-vfat \
-    kmod-usb-storage  \
-    kmod-usb-storage-extras  \
-    blkid  \
-    swap-utils  \
-    kmod-nls-cp1250  \
-    kmod-nls-cp1251  \
-    kmod-nls-cp437  \
-    kmod-nls-cp775  \
-    kmod-nls-cp850  \
-    kmod-nls-cp852  \
-    kmod-nls-cp866  \
-    kmod-nls-iso8859-1  \
-    kmod-nls-iso8859-13  \
-    kmod-nls-iso8859-15  \
-    kmod-nls-iso8859-2  \
-    kmod-nls-koi8r  \
-    kmod-nls-utf8
+	block-mount \
+	kmod-fs-ext4 \
+	kmod-fs-vfat \
+	kmod-usb-storage  \
+	kmod-usb-storage-extras  \
+	blkid  \
+	swap-utils  \
+	kmod-nls-cp1250  \
+	kmod-nls-cp1251  \
+	kmod-nls-cp437  \
+	kmod-nls-cp775  \
+	kmod-nls-cp850  \
+	kmod-nls-cp852  \
+	kmod-nls-cp866  \
+	kmod-nls-iso8859-1  \
+	kmod-nls-iso8859-13  \
+	kmod-nls-iso8859-15  \
+	kmod-nls-iso8859-2  \
+	kmod-nls-koi8r  \
+	kmod-nls-utf8
 
 ifeq ($(GLUON_TARGET),x86-generic)
 	# support the USB stack on x86 devices
