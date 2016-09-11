@@ -5,7 +5,8 @@ Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
  * Modules Path in der site.conf hinterlegt.
- * 
+ * roamguide Paket
+ * USB Auto-Mount Paket
 
 Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
