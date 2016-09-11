@@ -20,7 +20,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
-#	gluon-au-change \
 	iwinfo \
 	fastd-traffic-status \
 	iptables \
