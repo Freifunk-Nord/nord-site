@@ -96,7 +96,7 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
 # from ffki-packages:
-USB_PACKAGES += \
+USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
