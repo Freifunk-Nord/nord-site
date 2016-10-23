@@ -8,7 +8,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-hostname \
 	gluon-config-mode-mesh-vpn \
-	gluon-config-mode-reboot-ffhh \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
 	gluon-luci-admin \
@@ -27,6 +26,9 @@ GLUON_SITE_PACKAGES := \
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
+# from ffhh-packages:
+GLUON_SITE_PACKAGES += \
+	gluon-config-mode-reboot-ffhh
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
