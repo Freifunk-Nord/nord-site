@@ -1,8 +1,8 @@
-Doku: https://gluon.readthedocs.org/en/latest/releases/v2016.1.6.html
+Doku: https://gluon.readthedocs.org/en/latest/releases/v2016.2.1.html
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
-* 0.16.6 - Gluon 2016.1.6
+* 2016.2.1 - Gluon 2016.2.1
 
 Download der Firmware:
 
@@ -48,6 +48,9 @@ GLUON_TARGET=x86-generic
 GLUON_TARGET=x86-kvm_guest
 GLUON_TARGET=x86-64
 GLUON_TARGET=x86-xen_domu
+
+# Mit 802.11s:
+
 brcm2708-bcm2708
 brcm2708-bcm2709
 ramips-rt305x

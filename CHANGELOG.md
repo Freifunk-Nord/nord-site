@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 0.16.6 basierend auf Gluon 2016.x.x
+Änderungen mit Firmwareversion 2016.2.1 basierend auf Gluon 2016.2.1
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
@@ -7,6 +7,64 @@ Freifunk Nord spezifische Änderungen:
  * Modules Path in der site.conf hinterlegt.
  * roamguide Paket
  * USB Auto-Mount Paket
+ * Earlybird und ownbuild Branch im Autoupdater entfernt
+ * mesh11s Branch im Autoupter hinzugefügt
+
+Generelle Änderungen an Gluon 2016.2.1
+--------------------------------------
+ * Aufruf der Statusseite nun ohne Cookies möglich
+ * Update auf Linuxkernel 3.18.44
+ * Sicherheitslücke CVE-2016-5195 und CVE-2016-7117 behoben
+ * 802.11s Support auf eine �ältere Version herabgestuft
+
+Generelle Änderungen an Gluon 2016.2
+--------------------------------------
+ * UBNT Airmax Modelle werden und überwiegend korrekt erkannt
+ * batman-adv: mesh_no_rebroadcast ist nun für Mesh-on-WAN/LAN aktiv
+ * Die neue UCI Option gluon-core.@wireless[0].preserve_channels kann genutzt werden um einen Kanalwechsel durch ein Firmware Update zu verhindern
+ * Bei TP-Link CPE 210/510 und Ubiquiti NanoStations kann nun PoE passthrough in der site.conf hinterlegt und in der Erweiterten Einstellungen der Konfigurationsseite aktiviert werden.
+ * Die Höhenangaben kann nun mittels der Option config_mode.geo_location.show_altitude über die site.conf ausgeblendet werden
+ * Das Kontaktinformationsfeld kann mittels der Funktion config_mode.owner.obligatory über die site.conf optional gemacht werden  - in FFNord nicht implementiert.
+ * Der Knotenname kann nun aus allen UTF-8 Zeichen bestehen
+ * Diverse Anpassungen an der Konfigurationsseite
+ * Dropbear wurde aktualisiert und unterstützt nun neue Verschlüsselungsmethoden
+ * Es ist nun möglich WLAN_basic rates in der site.conf zu hinterlegen was alte WLAN Standards <=802.11b deaktiviert
+ * ath10k basierende Geräte werden nun offiziell unterstützt, hierzu muss in der site.mk der Wert für GLUON_ATH10K_MESH auf IBSS oder 11s sowie die Option GLUON_REGION gesetzt sein
+ * Die prefix4 und next_node.ip4 Option in der site.conf ist nun optional
+ * Die Stabilität der ath9k Geräte wurde maßgeblich erhöht
+ * mac80211, hostapd sowie andere relevante Treiber und Dienste wurden von LEDE 42f559e zurückportiert.
+ * Multiple Instanzen des Autoupdaters an langsamen Anschlüssen werden nun mittels eines Lockfiles verhindert
+ * Statische DNS Server am WAN Port funktionieren nun
+ * Der Expertenmodus der Konfigurationsseite wurde in Erweiterte Einstellungen umbenannt
+ * MESH Interfaces werden nun protokollunabhängig mit UCI konfiguriert
+ * Die MAC Adressen Zuweisung von allen MESH und WLAN Interfaces wurde zur Vorbereitung auf die zukünftige Ralink / Mediatek Unterstützung modifiziert
+ * Änderungen zur Vorbereitung der Unterstützung der neuen batman-adv multicast Optimierungen
+ * Der LUA Code wurde verkleinert um Speicherpatz zu sparen
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        TP-Link TL-WA901ND v4 Archer C5 v1, Archer C7 v2 TL-WR710N v2.1, TL-WR842N/ND v3
+        Ubiquiti UniFi AP AC Lite, UniFi AP AC Pro
+        OpenMesh MR1750 v1, v2, OM2P-HS v3, OM5P-AC v1, v2
+        GL Innovations GL-AR150
+        Buffalo WZR-HP-G300NH2
+        ALFA Network Tube2H, N2, N5
+
+    brcm2708-bcm2708
+        Raspberry Pi 1
+
+    brcm2708-bcm2708
+        Raspberry Pi u2
+
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.html
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.1html
+
+
 
 Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
