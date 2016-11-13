@@ -5,17 +5,19 @@ Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
  * Modules Path in der site.conf hinterlegt.
- * roamguide Paket
+ * roamguide Paket, automatisch aktiviert
  * USB Auto-Mount Paket
  * Earlybird und ownbuild Branch im Autoupdater entfernt
- * mesh11s Branch im Autoupter hinzugefügt
+ * mesh11s Branch im Autoupdater hinzugefügt
+ * gluon-quickfix integriert um Wifiprobleme zu beheben und Router bei hängenden Diensten neuzustarten
+ * gluon-ssid-changer integriert dieser schaltet die SSID von Knoten ohne Verbindung zum Gateway auf FFOFFLINE um
 
 Generelle Änderungen an Gluon 2016.2.1
 --------------------------------------
  * Aufruf der Statusseite nun ohne Cookies möglich
  * Update auf Linuxkernel 3.18.44
  * Sicherheitslücke CVE-2016-5195 und CVE-2016-7117 behoben
- * 802.11s Support auf eine �ältere Version herabgestuft
+ * 802.11s Support auf eine ältere Version herabgestuft
 
 Generelle Änderungen an Gluon 2016.2
 --------------------------------------
@@ -58,13 +60,36 @@ Mehr Routermodelle werden unterstützt
     brcm2708-bcm2708
         Raspberry Pi u2
 
+Generelle Änderungen an Gluon 2016.1.6
+--------------------------------------
+
+ * build: fix nodejs host build on Debian Wheezy (#776)
+ * build: fix parallel builds with Make 4.2+
+ * Trying to use -j N with Make 4.2 would spawn an unlimited number of processes, eventually leading to memory exhaustion.
+ * build: fix occasional build failure in libpcap package
+ * build: don’t require hexdump for x86 builds (#811)
+ * Trying to build Gluon for x86 on systems without hexdump would silently generate broken images.
+ * Add support for DNS servers given by their link-local IPv6 address in Router Advertisements (#854)
+ * ar71xx-generic: correctly setup LNA GPIOs on CPE210/510 (#796)
+ * Improves the reception by about 20dB.
+ * ar71xx-generic: switch default WAN/LAN assignment on Ubiquiti UAP Pro (#764)
+ * Switch to the usual “PoE is WAN/setup mode, secondary is LAN” scheme. This only affects new installations; the assignment won’t be changed on updates unless the configuration is reset.
+ * ar71xx-generic: fix ath10k memory leak (#690)
+ * ar71xx-generic: add support for new TP-Link region codes (#860)
+ * TP-Link has started providing US- and EU-specific firmwares for the Archer C7 v2. To generate Gluon images installable from these new firmwares, the GLUON_REGION variable must be set to eu or us in site.mk or on the make command line (the images will still be installable from all old firmwares without region codes).
+
+Bekannte Bugs:
+-------------------------------------
+
+ * WAN MAC rotiert bei jeden Neustart
+ * Gluon Issue #933 Wird durch den Quickfix umgangen
+    
  Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
+* http://gluon.readthedocs.io/en/v2016.1.6/releases/v2016.1.6.html
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.html
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.1html
-
-
 
 Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
