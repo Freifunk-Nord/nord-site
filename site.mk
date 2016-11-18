@@ -19,7 +19,9 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
-	iwinfo \
+	gluon-quickfix \
+        gluon-ssid-changer \
+        iwinfo \
 	fastd-traffic-status \
 	iptables \
 	haveged

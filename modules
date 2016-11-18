@@ -1,21 +1,25 @@
 # This file allows specifying additional repositories to use
 # when building gluon.
 
-GLUON_SITE_FEEDS='ffhh ffki roamguide'
+GLUON_SITE_FEEDS='ffhh ffki roamguide ssidchanger'
 
 # the git repository from where to clone the package feed
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
+PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git
 PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 # for roamguide:
-# GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
+GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
+
 
 # the version/commit of the git repository to clone
 PACKAGES_FFHH_COMMIT=818765060bc76a109dde1558513fd086e5973ef1
 PACKAGES_FFKI_COMMIT=67ffe553db95684aa144aa5b5d15905d18d44efb
 PACKAGES_ROAMGUIDE_COMMIT=cc8253d6dd62cd6ba4f04506711edd0705dc5532
+PACKAGES_SSIDCHANGER_COMMIT=2550af343202746ac6be9ce9b719cb1caa672d82
 
 # the branch to check out
 PACKAGES_FFHH_BRANCH=master
 PACKAGES_FFKI_BRANCH=master
 PACKAGES_ROAMGUIDE_BRANCH=master
+PACKAGES_SSIDCHANGER_BRANCH=master
