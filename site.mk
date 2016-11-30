@@ -107,11 +107,33 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-iso8859-2 \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
+
+USB_X86_GENERIC_NETWORK_MODULES := \
+	kmod-usb-ohci-pci \
+	kmod-sky2 \
+	kmod-atl2 \
+	kmod-igb \
+	kmod-3c59x \
+	kmod-e100 \
+	kmod-e1000 \
+	kmod-e1000e \
+	kmod-natsemi \
+	kmod-ne2k-pci \
+	kmod-pcnet32 \
+	kmod-8139too \
+	kmod-r8169 \
+	kmod-sis900 \
+	kmod-tg3 \
+	kmod-via-rhine \
+	kmod-via-velocity \
+	kmod-forcedeth
+
 # from ffki-packages:
 USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
+# add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
@@ -121,7 +143,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_PACKAGES_HID) \
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
-		$(USB_PACKAGES_GPS)
+		$(USB_PACKAGES_GPS) \
+		$(USB_X86_GENERIC_NETWORK_MODULES)
 endif
 
 ifeq ($(GLUON_TARGET),ar71xx-generic)
