@@ -20,14 +20,16 @@ GLUON_SITE_PACKAGES := \
 	gluon-radvd \
 	gluon-status-page \
 	gluon-quickfix \
-        gluon-ssid-changer \
-        iwinfo \
+	iwinfo \
 	fastd-traffic-status \
 	iptables \
 	haveged
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
+# from ssidchanger-packages:
+GLUON_SITE_PACKAGES += \
+	gluon-ssid-changer
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
