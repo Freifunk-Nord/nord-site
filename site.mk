@@ -6,7 +6,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-setup-mode \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
-	gluon-config-mode-hostname \
 	gluon-config-mode-mesh-vpn \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
@@ -33,6 +32,10 @@ GLUON_SITE_PACKAGES += \
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
+# from ffki-packages:
+GLUON_SITE_PACKAGES += \
+	gluon-config-mode-hostname-no-pretty \
+	
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
