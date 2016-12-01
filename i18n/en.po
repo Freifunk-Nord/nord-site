@@ -64,3 +64,13 @@ msgstr ""
 
 msgid "e.g. E-mail or phone number"
 msgstr "e.g. E-mail, chat buddy or phone number"
+
+
+# translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
+
+msgid "gluon-config-mode:altitude-label"
+msgstr "Altitude (3m per storey)"
+
+msgid "gluon-config-mode:altitude-help"
+msgstr ""
+"Specifying the altitude is optional and can be aproximated with 3m per storey."
