@@ -49,3 +49,18 @@ msgstr ""
 "(<em><%= escape(hostname) %></em>) and some additional information at "
 "<a href=\"https://formular.nord.freifunk.net/#/new?hostname=<%= urlescape(hostname) %>&mac=<%= sysconfig.primary_mac %>\" target=\"_blank\">https://formular.ffnord.net/</a> "
 "."
+
+
+# translations from within default gluon:
+
+msgid "Altitude"
+msgstr "Altitude (3m per storey)"
+
+msgid ""
+"Specifying the altitude is optional and should only be done if a proper "
+"value is known."
+msgstr ""
+"Specifying the altitude is optional and can be aproximated with 3m per storey."
+
+msgid "e.g. E-mail or phone number"
+msgstr "e.g. E-mail, chat buddy or phone number"
