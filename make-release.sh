@@ -10,21 +10,21 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2016.2~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2016.2.1~exp$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
-BROKEN="BROKEN=1"
+BROKEN=""
 
 cd ..
 if [ ! -d "site" ]; then
 	echo "This script must be called from within the site directory"
-	return
+	exit
 fi
 
-if [ "$(whoami)" == "root" ]; then 
+if [ "$(whoami)" == "root" ]; then
 	echo "Make may not be run as root"
 	return
 fi
