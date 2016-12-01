@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2016.2.1~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2016.2.1"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -101,5 +101,4 @@ then
 fi
 cd site
 date >> build.log
-mv -v ../output/images "../output/$VERSION"
 echo "Done :)"
