@@ -20,9 +20,10 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 	gluon-quickfix \
 	iwinfo \
-	fastd-traffic-status \
 	iptables \
 	haveged
+# geht nicht mehr:	fastd-traffic-status \
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide

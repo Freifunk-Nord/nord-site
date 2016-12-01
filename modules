@@ -10,7 +10,7 @@ PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git
 PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 # for roamguide:
-GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
+#GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
 
 
 # the version/commit of the git repository to clone
