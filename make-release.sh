@@ -106,4 +106,5 @@ then
 fi
 cd site
 date >> ../build.log
+mv -v ../output/images "../output/$VERSION"
 echo "Done :)"
