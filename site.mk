@@ -22,7 +22,6 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	iptables \
 	haveged
-# geht nicht mehr:	fastd-traffic-status \
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
@@ -32,7 +31,9 @@ GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-reboot-ffhh
+	gluon-config-mode-reboot-ffhh \
+	fastd-traffic-status
+
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
