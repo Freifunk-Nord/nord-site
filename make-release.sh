@@ -18,7 +18,7 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN=""
 
-cd ..
+cd ../
 if [ ! -d "site" ]; then
 	echo "This script must be called from within the site directory"
 	exit
@@ -37,7 +37,12 @@ echo "tail -f ../build.log &"
 sleep 3
 
 #rm -r output
-for TARGET in  ar71xx-generic ar71xx-mikrotik ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-rt305x sunxi x86-64 x86-generic x86-kvm_guest x86-xen_domu
+ONLY_11S=ramips-rt305x ramips-mt7621
+BANANAPI=sunxi
+RASPBPI=brcm2708-bcm2708 brcm2708-bcm2709 
+X86=x86-64 x86-generic x86-kvm_guest x86-xen_domu
+WDR4900=mpc85xx-generic
+for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86
 do
 	date >> build.log
 	if [ -z "$VERSION" ]
@@ -100,5 +105,5 @@ then
 	contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/stable.manifest >> build.log 2>&1
 fi
 cd site
-date >> build.log
+date >> ../build.log
 echo "Done :)"
