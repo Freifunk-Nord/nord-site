@@ -37,11 +37,11 @@ echo "tail -f ../build.log &"
 sleep 3
 
 #rm -r output
-ONLY_11S=ramips-rt305x ramips-mt7621
-BANANAPI=sunxi
-RASPBPI=brcm2708-bcm2708 brcm2708-bcm2709 
-X86=x86-64 x86-generic x86-kvm_guest x86-xen_domu
-WDR4900=mpc85xx-generic
+ONLY_11S="ramips-rt305x ramips-mt7621"
+BANANAPI="sunxi"
+RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
+X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
+WDR4900="mpc85xx-generic"
 for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86
 do
 	date >> build.log
