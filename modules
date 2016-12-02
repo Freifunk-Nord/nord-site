@@ -4,7 +4,7 @@
 GLUON_SITE_FEEDS='ffhh ffki eulenfunk ssidchanger roamguide'
 
 # the git repository from where to clone the package feed
-PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
+PACKAGES_FFHH_REPO=https://github.com/Freifunk-Nord/ffhh-packages
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_EULENFUNK_REPO=https://github.com/eulenfunk/packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git

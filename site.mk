@@ -31,9 +31,8 @@ GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-reboot-ffhh
-# not working in 2016.2.1 (ask tokudan)
-# fastd-traffic-status
+	gluon-config-mode-reboot-ffhh \
+	fastd-traffic-status
 
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
