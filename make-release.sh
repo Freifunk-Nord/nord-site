@@ -16,7 +16,9 @@ BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
-BROKEN=""
+BROKEN="BROKEN=1"
+#set num cores
+CORES="-j1"
 
 cd ../
 if [ ! -d "site" ]; then
@@ -37,12 +39,29 @@ echo "tail -f ../build.log &"
 sleep 3
 
 #rm -r output
-ONLY_11S="ramips-rt305x ramips-mt7621"
-BANANAPI="sunxi"
+
+#  ramips-mt7621:  BROKEN: No AP+IBSS support, 11s has high packet loss
+#  ramips-rt305x:  BROKEN: No AP+IBSS support
+
+WRT1200AC="mvebu" # Linksys WRT1200AC BROKEN: No AP+IBSS+mesh support
+
+ONLY_11S="ramips-rt305x ramips-mt7621" 		# BROKEN only
+
+ONLY_LEDE="ar71xx-tiny" # Support for for 841 on lede, needs less packages, so the 4MB will suffice!
+
+BANANAPI="sunxi" 													# BROKEN: Untested, no sysupgrade support
+MICROTIK="ar71xx-mikrotik" 								# BROKEN: no sysupgrade support
+
 RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
 X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
 WDR4900="mpc85xx-generic"
-for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86
+
+TARGETS=ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86
+if [ $BROKEN != "" ]; then
+	TARGETS+="$BANANAPI $MICROTIK $WRT1200AC $ONLY_11S"
+fi
+
+for TARGET in $TARGETS
 do
 	date >> build.log
 	if [ -z "$VERSION" ]
@@ -52,8 +71,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	else
 		echo "Starting work on target $TARGET" | tee -a build.log
@@ -61,8 +80,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
