@@ -17,21 +17,25 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
-	gluon-quickfix \
 	iwinfo \
 	iptables \
 	haveged
 
+# from eulenfunk:
+GLUON_SITE_PACKAGES += \
+	gluon-quickfix \
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
+
 # from ssidchanger-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
+
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-reboot-ffhh \
-	fastd-traffic-status
+	gluon-config-mode-reboot-ffhh
 
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
