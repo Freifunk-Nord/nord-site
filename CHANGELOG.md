@@ -1,3 +1,39 @@
+Änderungen mit Firmwareversion 2016.2.2 basierend auf Gluon 2016.2.2
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+
+ * Domainwechsel der Gateways auf freifunknord.de
+ * fastd-traffic-status entfernt
+ * probability in der site.conf entfernt (Altlast aus 2014)
+ * Update der FFHH Pakete auf c9d083f52384c2a52c303924de3960705c7c945b
+
+Generelle Änderungen an Gluon 2016.2.2
+--------------------------------------
+ * Bootprobleme auf mehreren QCA955x-basierenden Geräten behoben (z.B. OpenMesh OM5P AC v2) (#965)
+ * Build-Prozess: Git Downloadprobleme von git.kernel.org auf Debian Wheezy behoben(#919)
+ * Fix: RX Filter von Ubiquiti UAP Outdoor+ Geräten (d43147a8e03d)
+ * Fix: vertauschtes WAN/LAN interface bei der CPE210 (59deb2064d54)
+ * Deutliche Vverringerung der CPU Last durch die Steuerung der Signal LEDs (#897)
+ * Fix: Netzwerk-Port des Ubiquiti UAP AC Lite (#911)
+ * Build: /tmp Verzeichnis des Hosts wird nicht länger genutzt (f9072a36411b)
+ * Fix: mesh interface type respondd/alfred announcements wenn VLANs über IBSS genutzt werden (#941)
+ * Fix: next-node ebtables Regeln ohne next_node.ip4 (9dbe9f785d2b) 
+ * x86-generic und x86-64 images haben nun PATA und MMC support.
+ * Clean up opkg postinst scripts während der Imageerstellung.
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        TP-Link:    CPE210/510 EU/US versions, TL-WA801N/ND v3, TL-WR841ND v11 EU/US versions 
+
+Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* http://gluon.readthedocs.io/en/v2016.2.2/releases/v2016.2.2.html
+
 Änderungen mit Firmwareversion 2016.2.1 basierend auf Gluon 2016.2.1
 ================================================================
 
@@ -5,7 +41,7 @@ Freifunk Nord spezifische Änderungen:
 -------------------------------------
 
  * Modules Path in der site.conf hinterlegt.
- * roamguide Paket, automatisch aktiviert
+ * roamguide Paket
  * USB Auto-Mount Paket
  * Earlybird und ownbuild Branch im Autoupdater entfernt
  * mesh11s Branch im Autoupdater hinzugefügt
@@ -89,7 +125,7 @@ Bekannte Bugs:
 
 * http://gluon.readthedocs.io/en/v2016.1.6/releases/v2016.1.6.html
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.html
-* https://gluon.readthedocs.io/en/latest/releases/v2016.2.1html
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.1.html
 
 Änderungen mit Firmwareversion 0.16.5 basierend auf Gluon 2016.1.5
 ================================================================
