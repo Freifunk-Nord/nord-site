@@ -11,7 +11,8 @@ PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.gi
 PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 # for roamguide:
 #GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
-
+#cd roamguide
+#git config http.sslVerify false
 
 # the version/commit of the git repository to clone
 PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
