@@ -136,7 +136,8 @@ USB_X86_GENERIC_NETWORK_MODULES := \
 # from ffki-packages:
 USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
-	gluon-config-mode-usb-media
+	gluon-config-mode-usb-media \
+	gluon-config-mode-ppa
 
 # add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
