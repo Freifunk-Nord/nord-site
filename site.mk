@@ -21,10 +21,6 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 
-# from eulenfunk:
-GLUON_SITE_PACKAGES += \
-	gluon-quickfix \
-
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
