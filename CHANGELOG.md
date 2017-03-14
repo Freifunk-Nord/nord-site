@@ -1,3 +1,31 @@
+Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+ * Ein fehlerhaftes Kernel Modul wurde repariert. Dies führte unter 2016.2.2 zu Abstürzen der Knoten.
+ 
+Generelle Änderungen an Gluon 2016.2.4
+--------------------------------------
+ * Ein Problem mit batman-adv (compat 15) wurde behoben. Dieses führte dazu, dass Pakete einer bestimmten Größe nicht übertragen werden konnen (b7eeef9).
+ Die Gluon Entwickler gehen davon aus, dass dies der Grund für hängende Autoupdateprozesse war.
+ * Ein Problem beim kompilieren der Gluon Firmware wurde behoben (#1059).
+ * Es wurde ein Fehler im Ladescript von respondd behoben, der zum einem Speicherüberlauf führte (9a0aeb9).
+ * Die sysupgrade Files für x86 Systeme wurden repariert (41fd50d, ad37e2b).
+ * Der Manifestgenerator erstellt nun Hashwerte mit dem SHA256 Algorithmus.
+
+Probleme mit Gluon 2016.2.4
+--------------------------------------
+ * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst.
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen.
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren.
+ 
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.4.html
+
+
 Änderungen mit Firmwareversion 2016.2.3 basierend auf Gluon 2016.2.3
 ================================================================
 
