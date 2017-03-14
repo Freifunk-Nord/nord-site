@@ -1,3 +1,31 @@
+Änderungen mit Firmwareversion 2016.2.3 basierend auf Gluon 2016.2.3
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+
+ * Erstmalig stehen auch Images für 802.11s bereit
+ * experimenteller Support für den Fonera 20A *danke* an Marlow von Freifunk Flensburg/Irland
+
+Generelle Änderungen an Gluon 2016.2.3
+--------------------------------------
+ * respondd wird nun bei einem Fehler automatisch neu gestartet (#863)
+ * autoupdater timeouts verändert, dies verhindert ein "hängen" des Autoupdaters beim Manifest-Download. Er wurde nun so verbessert, dass der wget Prozess jederzeit sicher beendet werden kann. (#987)
+ * Änderung der WLAN-Länderkodierung wurde verbessert (#1001)
+ 
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        TP-Link:    TL-WR940N v4, TL-WR1043ND v4
+    ramips-rt305x
+        Fonera:     20N
+
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.3.html
+
 Änderungen mit Firmwareversion 2016.2.2 basierend auf Gluon 2016.2.2
 ================================================================
 
