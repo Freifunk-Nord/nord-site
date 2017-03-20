@@ -22,29 +22,29 @@ GLUON_SITE_PACKAGES := \
 	haveged
 
 # from eulenfunk:
-GLUON_SITE_PACKAGES += \
-	gluon-quickfix \
-
+#GLUON_SITE_PACKAGES += \
+#	gluon-quickfix \
+#
 # from sargon:
-GLUON_SITE_PACKAGES += \
-	roamguide
-
+#GLUON_SITE_PACKAGES += \
+#	roamguide
+#
 # from ssidchanger-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-ssid-changer
+#GLUON_SITE_PACKAGES += \
+#	gluon-ssid-changer
 
 # from ffhh-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-reboot-ffhh
+#GLUON_SITE_PACKAGES += \
+#	gluon-config-mode-reboot-ffhh
 
 # from ffki-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-hostname-no-pretty \
-	gluon-config-mode-ppa
+#GLUON_SITE_PACKAGES += \
+#	gluon-config-mode-hostname-no-pretty \
+#	gluon-config-mode-ppa
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2016.2.4~exp$(shell date '+%y%m%d%H%M')
+DEFAULT_GLUON_RELEASE := 2017.0.0~lede$(shell date '+%y%m%d%H%M')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
