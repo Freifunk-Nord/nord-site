@@ -1,4 +1,4 @@
-Doku: https://gluon.readthedocs.org/en/latest/releases/v2016.2.4.html
+Doku: https://gluon.readthedocs.org/en/latest/
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
@@ -23,6 +23,7 @@ Firmware selber bauen:
 
 1.3 Freifunk Nord Site clonen
 
+	cd gluon
 	git clone -b nord-lede https://github.com/ffnord/nord-site.git site
 
 2. Firmware bauen 
