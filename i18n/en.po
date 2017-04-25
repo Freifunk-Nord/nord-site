@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2017-03-14 17:55+0100\n"
+"PO-Revision-Date: 2017-04-25 19:55+0100\n"
 "Last-Translator: bdobe\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -40,7 +40,7 @@ msgstr ""
 "<a href=\"https://nord.freifunk.net/\">our homepage</a>.</p>"
 "<p>Have fun with your node and exploring the Freifunk network!</p>"
 
-msgid "gluon-config-mode:nopubkey"
+msgid "gluon-config-mode:novpn"
 msgstr ""
 "<p><div class=\"the-key\">You have selected <strong>not</strong> to use the mesh VPN. "
 "Your node will only be able to connect to the internet if other nodes in reach "
@@ -49,24 +49,6 @@ msgstr ""
 "(<em><%= pcdata(hostname) %></em>) and some additional information at "
 "<a href=\"https://formular.nord.freifunk.net/#/new?hostname=<%= urlencode(hostname) %>&mac=<%= sysconfig.primary_mac %>\" target=\"_blank\">https://formular.nord.freifunk.net/</a> "
 "."
-
-
-# translations from within default gluon:
-
-msgid "Altitude"
-msgstr "Altitude (3m per storey)"
-
-msgid ""
-"Specifying the altitude is optional and should only be done if a proper "
-"value is known."
-msgstr ""
-"Specifying the altitude is optional and can be aproximated with 3m per storey."
-
-msgid "e.g. E-mail or phone number"
-msgstr "e.g. E-mail, chat buddy or phone number"
-
-
-# translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
 
 msgid "gluon-config-mode:altitude-label"
 msgstr "Altitude (3m per storey)"

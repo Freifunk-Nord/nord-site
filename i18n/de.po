@@ -2,8 +2,8 @@ sgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2017-03-14 17:54+0100\n"
-"Last-Translator: bdobe\n"
+"PO-Revision-Date: 2017-04-25 19:53+0100\n"
+"Last-Translator: Tarnatos\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr ""
 "<a href=\"https://nord.freifunk.net/\">unserer Webseite</a>.</p>"
 "<p>Viel Spaß mit deinem Knoten und der Erkundung von Freifunk!</p>"
 
-msgid "gluon-config-mode:nopubkey"
+msgid "gluon-config-mode:novpn"
 msgstr ""
 "<p><div class=\"the-key\">Du hast ausgewählt, <strong>kein Mesh-VPN</strong> "
 "zu nutzen. Dein Knoten kann also nur dann eine Verbindung zum Freifunk Netz "
@@ -54,27 +54,15 @@ msgstr ""
 "<a href=\"https://formular.nord.freifunk.net/#/new?hostname=<%= urlencode(hostname) %>&mac=<%= sysconfig.primary_mac %>\" target=\"_blank\">https://formular.nord.freifunk.net/</a> "
 "ein."
 
-
-# translations from within default gluon:
-
-msgid "Altitude"
-msgstr "Höhe (3m pro Stock)"
-
-msgid ""
-"Specifying the altitude is optional and should only be done if a proper "
-"value is known."
-msgstr ""
-"Die Höhenangabe ist optional und kann geschätzt werden mit 3m pro Stockwerk."
-
-msgid "e.g. E-mail or phone number"
-msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
-
-
-# translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
-
 msgid "gluon-config-mode:altitude-label"
 msgstr "Höhe (3m pro Stock)"
 
 msgid "gluon-config-mode:altitude-help"
 msgstr ""
-"Die Höhenangabe ist optional und kann geschätzt werden mit 3m pro Stockwerk."
+"Die Höhenangabe ist optional und sollte nur gesetzt werden, wenn ein "
+"exakter Wert bekannt ist."
+
+# translations from within default gluon:
+
+msgid "e.g. E-mail or phone number"
+msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
