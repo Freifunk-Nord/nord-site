@@ -16,11 +16,13 @@ GLUON_SITE_PACKAGES := \
 	gluon-web-network \
 	gluon-web-private-wifi \
 	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
+	gluon-mesh-vpn-tunneldigger \
 	gluon-radvd \
 	gluon-status-page \
 	iwinfo \
 	iptables \
+	gluon-config-mode-tunneldigger \
+	gluon-tunneldigger-watchdog \
 	haveged
 
 # from eulenfunk:
