@@ -20,6 +20,10 @@ BROKEN="BROKEN=1"
 #set num cores
 CORES="-j1"
 
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
+ONLY_TARGET=""
+#ONLY_TARGET="ar71xx-generic"
+
 cd ../
 if [ ! -d "site" ]; then
 	echo "This script must be called from within the site directory"
@@ -29,6 +33,10 @@ fi
 if [ "$(whoami)" == "root" ]; then
 	echo "Make may not be run as root"
 	return
+fi
+
+if [ -d ../lede/ ]; then
+	echo lede was checked out, this will break, if you build 2016.2.x now
 fi
 
 echo "############## starting build process #################" >> build.log
@@ -60,6 +68,10 @@ WDR4900="mpc85xx-generic"
 TARGETS="ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86 $NOT_LEDE"
 if [ "$BROKEN" != "" ]; then
 	TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
+fi
+
+if [ $ONLY_TARGET != "" ]; then
+	TARGETS="$ONLY_TARGET"
 fi
 
 for TARGET in $TARGETS
