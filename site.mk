@@ -1,7 +1,6 @@
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-14 \
+	gluon-mesh-batman-adv-15 \
 	gluon-alfred \
-	gluon-respondd \
 	gluon-autoupdater \
 	gluon-setup-mode \
 	gluon-config-mode-core \
@@ -58,7 +57,7 @@ GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
 
 GLUON_REGION ?= eu
-GLUON_ATH10K_MESH ?= ibss
+GLUON_ATH10K_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
