@@ -1,3 +1,44 @@
+Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.5
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* Update auf B.A.T.M.A.N. compat 15.
+* Wechsel auf das MESH-Protokoll 802.11s, dadurch fällt die 2. MESH-SSID weg.
+* Nextnode Problem wurde gelößt. Neue Nextnode Adresse: 10.187.127.254.
+* Neuausrichtung der netzinternen IP Vergabe. DHCP Ranges der Gateways verkleinert.
+* Gateway Slots auf 20 erhöt.
+* Wegfall alternativer Autoupdater Branches. Alle Nodes werden nun unter stable geführt. Das erleichtert das updaten der Knoten.
+* opkg Repository liegt nun auf Gateway 0.
+* Gateway VPN Keys erneuert.
+* Autoupdate Server reduziert. Nun ist auch auch Public Server gelistet der von Knoten mit Uplink direkt und schneller genutzt werden   
+  kann.
+* rubo77 Autoupdater Signatur erneuert.
+* bigfoots Autoupdater Signatur entfernt.
+* Gateway Adressen geändert. Wechsel von vpnxx. auf xx.gw.
+* quickfix Update auf #62e79b0 verhindert nach einem Reboot 60 Minuten einen erneuten Neustart.
+* Nur Knoten die über das Knotenformular angemeldet sind können sich über VPN einwählen.
+* Fehlerhaften publik IPv6 Präfix (2a03:2267:4e6f:7264) durch korekte ULA (fd42:eb49:c0b5:4242) ersetzt.
+ 
+ 
+Generelle Änderungen an Gluon 2016.2.5
+--------------------------------------
+* Es wurde ein Problem behoben das unter B.A.T.M.A.N. compat 15 zu Kernel Abstürzen führte. (d452a7c)
+
+Probleme mit Gluon 2016.2.5
+--------------------------------------
+ * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst. (#1010)
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit 
+   vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+ 
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.5.html
+
+
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
 ================================================================
 
@@ -10,15 +51,15 @@ Generelle Änderungen an Gluon 2016.2.4
  * Ein Problem mit batman-adv (compat 15) wurde behoben. Dieses führte dazu, dass Pakete einer bestimmten Größe nicht übertragen werden konnen (b7eeef9).
  Die Gluon Entwickler gehen davon aus, dass dies der Grund für hängende Autoupdateprozesse war.
  * Ein Problem beim kompilieren der Gluon Firmware wurde behoben (#1059).
- * Es wurde ein Fehler im Ladescript von respondd behoben, der zum einem Speicherüberlauf führte (9a0aeb9).
+ * Es wurde ein Fehler im Ladescript von respondd behoben, der zum einem Speicherüberlauf führte. (9a0aeb9)
  * Die sysupgrade Files für x86 Systeme wurden repariert (41fd50d, ad37e2b).
  * Der Manifestgenerator erstellt nun Hashwerte mit dem SHA256 Algorithmus.
 
 Probleme mit Gluon 2016.2.4
 --------------------------------------
- * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst.
- * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen.
- * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren.
+ * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst. (#1010)
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren. (#496)
  
  Offizielle Changelogs zum nachlesen:
 ------------------------------------
