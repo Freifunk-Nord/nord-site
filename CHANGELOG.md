@@ -4,7 +4,7 @@
 Freifunk Nord spezifische Änderungen:
 -------------------------------------
 * Update auf B.A.T.M.A.N. compat 15.
-* Wechsel auf das MESH-Protokoll 802.11s, dadurch fällt die 2. MESH-SSID weg.
+* Wechsel auf das MESH-Protokoll 802.11s. Neue MESH-SSID 23:ca:ff:ee:ba:be
 * Nextnode Problem wurde gelößt. Neue Nextnode Adresse: 10.187.127.254.
 * Neuausrichtung der netzinternen IP Vergabe. DHCP Ranges der Gateways verkleinert.
 * Gateway Slots auf 20 erhöt.
@@ -18,8 +18,7 @@ Freifunk Nord spezifische Änderungen:
 * Gateway Adressen geändert. Wechsel von vpnxx. auf xx.gw.
 * quickfix Update auf #62e79b0 verhindert nach einem Reboot 60 Minuten einen erneuten Neustart.
 * Nur Knoten die über das Knotenformular angemeldet sind können sich über VPN einwählen.
-* Fehlerhaften publik IPv6 Präfix (2a03:2267:4e6f:7264) durch korekte ULA (fd42:eb49:c0b5:4242) ersetzt.
- 
+* Fehlerhaften publik IPv6 Präfix (2a03:2267:4e6f:7264) durch korekte ULA (fd42:eb49:c0b5:4242) ersetzt. 
  
 Generelle Änderungen an Gluon 2016.2.5
 --------------------------------------
