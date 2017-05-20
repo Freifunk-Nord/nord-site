@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.5
+Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x ([6 Commits nach v2016.2.5: 97f44c2](https://github.com/freifunk-gluon/gluon/commit/97f44c2))
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
