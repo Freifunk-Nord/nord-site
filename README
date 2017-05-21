@@ -23,9 +23,10 @@ Firmware selber bauen:
 
 1.3 FFNord Site clonen
 
+	cd /gluon/
 	git clone https://github.com/ffnord/nord-site.git site
 	git clone git://github.com/freifunkhamburg/ffhh-packages.git
-	mv ffhh-packages/* packages/
+	mv ffhh-packages/* package/
 	rm -Rf ffhh-packages
 
 2. Firmware bauen 
