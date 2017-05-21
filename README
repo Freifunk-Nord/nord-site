@@ -13,7 +13,7 @@ Firmware selber bauen:
 1. Vorbereitung:
 1.1 Abhängigkeiten installieren
 
-  	sudo apt-get install git subversion build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-de
+  	sudo apt-get install git subversion build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev
 
 1.2 Gluon repo clonen
 
