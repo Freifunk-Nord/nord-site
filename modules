@@ -4,17 +4,11 @@
 GLUON_SITE_FEEDS='ffhh ffki eulenfunk ssidchanger roamguide'
 
 # the git repository from where to clone the package feed
-PACKAGES_FFHH_REPO=https://github.com/Freifunk-Nord/ffhh-packages
+PACKAGES_FFHH_REPO=https://github.com/freifunkhamburg/ffhh-packages
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git
-#ROAMGUID from GitHub Fork
 PACKAGES_ROAMGUIDE_REPO=https://github.com/Freifunk-Nord/roamguide
-#PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
-# for roamguide:
-#GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
-#cd roamguide
-#git config http.sslVerify false
 
 # the version/commit of the git repository to clone
 PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
