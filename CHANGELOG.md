@@ -1,10 +1,10 @@
-Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x ([6 Commits nach v2016.2.5: 97f44c2](https://github.com/freifunk-gluon/gluon/commit/97f44c2))
+Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x 
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
 -------------------------------------
 * Update auf B.A.T.M.A.N. compat 15.
-* Wechsel auf das MESH-Protokoll 802.11s. Neue MESH-SSID 23:ca:ff:ee:ba:be
+* Wechsel auf das MESH-Protokoll 802.11s. Neue MESH-SSID ffnord-mesh
 * Nextnode Problem wurde gelößt. Neue Nextnode Adresse: 10.187.127.254.
 * Neuausrichtung der netzinternen IP Vergabe. DHCP Ranges der Gateways verkleinert.
 * Gateway Slots auf 20 erhöt.
