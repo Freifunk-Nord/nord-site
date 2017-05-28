@@ -29,8 +29,7 @@ Firmware selber bauen:
 2. Firmware bauen 
 2.1 Build vorbereiten
 
-	make update
-
+	git checkout v2016.2.5 && make update
 
 2.2 Build durchführen
 
