@@ -21,18 +21,15 @@ Firmware selber bauen:
 	git clone https://github.com/freifunk-gluon/gluon
 
 
-1.3 FFNord Site clonen
+1.3 Freifunk Nord Site clonen
 
+	cd gluon
 	git clone https://github.com/ffnord/nord-site.git site
-	git clone git://github.com/freifunkhamburg/ffhh-packages.git
-	mv ffhh-packages/* packages/
-	rm -Rf ffhh-packages
 
 2. Firmware bauen 
 2.1 Build vorbereiten
 
-	make update
-
+	git checkout v2016.2.5 && make update
 
 2.2 Build durchführen
 
@@ -67,12 +64,4 @@ GLUON_TARGET=mvebu
 
 3.2 Build Verzeichnis säubern
 
-	make clean GLUON_TARGET=ar71xx-generic
-	make clean GLUON_TARGET=ar71xx-nand
-	make clean GLUON_TARGET=mpc85xx-generic
-	make clean GLUON_TARGET=x86-generic
-	make clean GLUON_TARGET=x86-kvm_guest
-	make clean GLUON_TARGET=x86-64
-	make clean GLUON_TARGET=x86-xen_domu
-
-
+	make clean GLUON_TARGET=
