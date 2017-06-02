@@ -1,5 +1,6 @@
 GLUON_SITE_PACKAGES := \
 	gluon-mesh-batman-adv-15 \
+	gluon-respondd \
 	gluon-alfred \
 	gluon-autoupdater \
 	gluon-setup-mode \
@@ -51,7 +52,7 @@ DEFAULT_GLUON_RELEASE := 2016.2.5
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= experimental
+GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
