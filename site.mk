@@ -8,7 +8,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-hostname \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
 	gluon-web-admin \
@@ -16,13 +15,12 @@ GLUON_SITE_PACKAGES := \
 	gluon-web-network \
 	gluon-web-private-wifi \
 	gluon-web-wifi-config \
-	gluon-mesh-vpn-tunneldigger \
 	gluon-radvd \
 	gluon-status-page \
 	iwinfo \
 	iptables \
-	gluon-config-mode-tunneldigger \
-	gluon-tunneldigger-watchdog \
+	gluon-mesh-vpn-tunneldigger \
+	gluon-config-mode-mesh-vpn \
 	haveged
 
 # from eulenfunk:

@@ -1,9 +1,0 @@
-# This file allows specifying additional repositories to use
-# when building gluon.
-
-GLUON_SITE_FEEDS='ffrl_packages'
-
-#FFRL Packages
-PACKAGES_FFRL_PACKAGES_REPO=https://github.com/ffrl/ffrl-packages.git
-PACKAGES_FFRL_PACKAGES_COMMIT=434f2181290b129bdfbb09ca16e1d9696c8327be
-PACKAGES_FFRL_PACKAGES_BRANCH=master
