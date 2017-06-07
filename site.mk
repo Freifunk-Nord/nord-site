@@ -1,5 +1,5 @@
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-14 \
+	gluon-mesh-batman-adv-15 \
 	gluon-core \
 	gluon-alfred \
 	gluon-respondd \
@@ -54,7 +54,7 @@ DEFAULT_GLUON_RELEASE := 2017.0.0~lede$(shell date '+%y%m%d%H%M')
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= lede
+GLUON_BRANCH ?= lede-l2tp
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
