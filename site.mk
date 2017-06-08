@@ -23,8 +23,8 @@ GLUON_SITE_PACKAGES := \
 	haveged
 
 # from eulenfunk:
-#GLUON_SITE_PACKAGES += \
-#	gluon-quickfix \
+GLUON_SITE_PACKAGES += \
+	gluon-quickfix
 #
 # from sargon:
 #GLUON_SITE_PACKAGES += \
