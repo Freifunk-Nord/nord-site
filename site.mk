@@ -31,8 +31,8 @@ GLUON_SITE_PACKAGES := \
 #	roamguide
 #
 # from ssidchanger-packages:
-#GLUON_SITE_PACKAGES += \
-#	gluon-ssid-changer
+GLUON_SITE_PACKAGES += \
+	gluon-ssid-changer
 
 # from ffhh-packages:
 #GLUON_SITE_PACKAGES += \
