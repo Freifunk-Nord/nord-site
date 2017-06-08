@@ -27,8 +27,8 @@ GLUON_SITE_PACKAGES += \
 	gluon-quickfix
 #
 # from sargon:
-#GLUON_SITE_PACKAGES += \
-#	roamguide
+GLUON_SITE_PACKAGES += \
+	roamguide
 #
 # from ssidchanger-packages:
 GLUON_SITE_PACKAGES += \
