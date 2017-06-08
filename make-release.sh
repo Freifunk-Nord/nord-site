@@ -16,7 +16,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2017.0.0~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.0.0~lede$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -28,7 +28,11 @@ CORES="-j1"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic"
+ONLY_TARGET="ar71xx-tiny"
+
+#to build only some device set DEVICES list (only if $ONLY_TARGET!="")
+#DEVICES=""
+DEVICES="DEVICES=tp-link-tl-wr841n-nd-v9"
 
 cd ../
 if [ ! -d "site" ]; then
@@ -85,22 +89,22 @@ do
 	date >> build.log
 	if [ -z "$VERSION" ]
 	then
-		echo "Starting work on target $TARGET" | tee -a build.log
+		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	else
-		echo "Starting work on target $TARGET" | tee -a build.log
+		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
@@ -108,7 +112,7 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-echo -e "make GLUON_RELEASE=experimental manifest" >> build.log
+echo -e "make GLUON_BRANCH=experimental manifest" >> build.log
 make GLUON_BRANCH=experimental manifest >> build.log 2>&1
 echo -e "\n\n\n============================================================\n\n" >> build.log
 
