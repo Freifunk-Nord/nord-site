@@ -34,10 +34,6 @@ GLUON_SITE_PACKAGES += \
 GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 
-# from ffhh-packages:
-#GLUON_SITE_PACKAGES += \
-#	gluon-config-mode-reboot-ffhh
-
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa
