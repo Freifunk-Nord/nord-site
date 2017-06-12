@@ -1,9 +1,3 @@
-## Achtung mit LEDE hat sich die Manifesterstellung geändert.
-## Es wird nun mit:
-## make manifest GLUON_RELEASE=
-## erstellt. Dieses Script muss entsprechend geändert werden.
-
-
 #!/bin/bash
 
 ## This script will compile Gluon for all architectures, create the
@@ -112,20 +106,20 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-echo -e "make GLUON_BRANCH=experimental manifest" >> build.log
+echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=experimental manifest" >> build.log
 make GLUON_BRANCH=experimental manifest >> build.log 2>&1
 echo -e "\n\n\n============================================================\n\n" >> build.log
 
 if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make GLUON_BRANCH=beta manifest" >> build.log
+	echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=beta manifest" >> build.log
 	make GLUON_BRANCH=beta manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
 if [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make GLUON_BRANCH=stable manifest" >> build.log
+	echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=stable manifest" >> build.log
 	make GLUON_BRANCH=stable manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
