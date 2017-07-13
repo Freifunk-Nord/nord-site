@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## This script will compile Gluon for all architectures, create the
-## manifest and sign it. For that, you must have clone gluon and have a
+## manifest and sign it. For that, you must have cloned gluon and have a
 ## valid site config. Additionally, the signing key must be present in
 ## ../../ecdsa-key-secret or defined as first argument.
 ## The second argument defines the branch (stable, beta, experimental).
@@ -20,14 +20,19 @@ VERSION=${3:-"2017.1.1~lede$(date '+%y%m%d%H%M')"}
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
-#BROKEN must be set to "" or "BROKEN=1"
+
+# BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
-#set num cores
-CORES=$(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)
+
+# set num cores +1
+CORES=$(($(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)+1))
 CORES="-j$CORES"
 
-# set this to 1 if you want to use make clean before make
+# set this to "0" if you don't want to use make clean before make
 MAKE_CLEAN="1"
+
+# set this to "V=s" to get more output
+VERBOSE=""
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
 #ONLY_TARGET=""
@@ -87,8 +92,7 @@ if [ "$ONLY_TARGET" != "" ]; then
   TARGETS="$ONLY_TARGET"
 fi
 
-for TARGET in $TARGETS
-do
+for TARGET in $TARGETS; do
   date >> build.log
   echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
   OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION"
@@ -98,8 +102,8 @@ do
     echo -e "\n===========\n\n\n\n\nmake $OPTIONS clean" >> build.log
     time make $OPTIONS clean >> build.log 2>&1
   fi
-  echo -e "\n===========\n\n\n\n\nmake $OPTIONS $DEVICES V=s" >> build.log
-  time make $OPTIONS $DEVICES V=s >> build.log 2>&1
+  echo -e "\n===========\n\n\n\n\nmake $OPTIONS $DEVICES $VERBOSE" >> build.log
+  time make $OPTIONS $DEVICES $VERBOSE >> build.log 2>&1
   echo -e "\n\n\n============================================================\n\n" >> build.log
 done
 date >> build.log
@@ -133,14 +137,12 @@ echo "Manifest creation complete, signing manifest"
 echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/experimental.manifest" >> build.log
 contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/experimental.manifest >> build.log 2>&1
 
-if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]
-then
+if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]; then
   echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/beta.manifest" >> build.log
   contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/beta.manifest >> build.log 2>&1
 fi
 
-if [[ "$BRANCH" == "stable" ]]
-then
+if [[ "$BRANCH" == "stable" ]]; then
   echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/stable.manifest" >> build.log
   contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/stable.manifest >> build.log 2>&1
 fi
