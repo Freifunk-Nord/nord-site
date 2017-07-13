@@ -55,7 +55,7 @@ echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
 echo "see debug output with"
-echo "tail -f ../build.log &"
+echo "tail -F ../build.log &"
 sleep 3
 
 #rm -r output
@@ -105,7 +105,7 @@ done
 date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
-
+set +e
 MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
 if [[ true ]]; then
   B="experimental"
@@ -148,4 +148,3 @@ cd site
 date >> ../build.log
 mv -v ../output/images "../output/$VERSION"
 echo "Done :)"
-
