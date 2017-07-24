@@ -1,14 +1,22 @@
-Doku: https://gluon.readthedocs.org/en/latest/
+# Validation
+
+You can validate your changes to this repository by calling the validate_site.sh file with
+
+    tests/validate_site.sh
+
+# Dokumetation
+
+https://gluon.readthedocs.org/en/latest/
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
 * 2017.1.1 - Gluon LEDE 2017.1.1
 
-Download der Firmware:
+# Download der Firmware
 
 * https://nord.freifunk.net/firmware.html
 
-Firmware selber bauen:
+# Firmware selber bauen
 
 1. Vorbereitung:
 1.1 Abhängigkeiten installieren
@@ -37,7 +45,7 @@ Firmware selber bauen:
 	make -j8 GLUON_TARGET=ar71xx-generic ##-j $ZAHL$ = Anzahl der CPU Kerne
 
 
-Mögliche Targets:
+## Mögliche Targets
 
 ar71xx-generic
 ar71xx-mikrotik
@@ -48,7 +56,7 @@ x86-64
 x86-generic
 x86-geode
 
-# Nur mit 802.11s:
+## Nur mit 802.11s
 
 brcm2708-bcm2708
 brcm2708-bcm2709
