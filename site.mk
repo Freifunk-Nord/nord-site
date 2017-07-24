@@ -42,6 +42,9 @@ GLUON_SITE_PACKAGES += \
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
 	gluon-config-mode-ppa
+# from ffm-packages
+GLUON_SITE_PACKAGES += \
+	ffffm-button-bind
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
