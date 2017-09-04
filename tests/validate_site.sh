@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_BRANCH='v2016.2.6'
+GLUON_BRANCH='v2016.2.7'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
@@ -57,14 +57,17 @@ echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 # ignore standard packages:
 sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
-#lede: sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
+# in lede this will be needed:
+# sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
 while read packet; do
-  echo "check $packet ..."
-  if [ "$(find $testpath/packages/ -type d -name "$packet")" '!=' '' ]; then
-    : find found something
-  else
-    echo "ERROR: $packet missing"
-    exit 1
+  if [ "$packet" != "" ]; then
+    echo "check $packet ..."
+    if [ "$(find $testpath/packages/ -type d -name "$packet")" '!=' '' ]; then
+      : find found something
+    else
+      echo "ERROR: $packet missing"
+      exit 1
+    fi
   fi
 done
