@@ -6,11 +6,11 @@ You can validate your changes to this repository by calling the validate_site.sh
 
 # Dokumentation
 
-https://gluon.readthedocs.org/en/latest/releases/v2016.2.6.html
+https://gluon.readthedocs.org/en/latest/releases/v2016.2.7.html
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
-* 2016.2.6 - Gluon 2016.2.6
+* 2016.2.7 - Gluon 2016.2.7
 
 # Download der Firmware
 

@@ -1,3 +1,18 @@
+Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.x 
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* neuer gluon-quickfix
+* Der Wifi-Taster ist beim TL-WR7/841/2N(D) und beim WR1043 default inaktiv. 
+  man kan die Funktionalität im Config Mode einstellen
+* Der ssidchanger checkt jetzt eimal alle 60 Minuten
+ 
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.7.html
+
 Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x 
 ================================================================
 
