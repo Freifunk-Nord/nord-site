@@ -43,13 +43,14 @@ GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
 	gluon-config-mode-ppa
 # from ffm-packages
-GLUON_SITE_PACKAGES += \
-	ffffm-button-bind
+#GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
+#	better at the bottom for only some models
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2016.2.5~exp$(shell date '+%y%m%d%H%M')
-DEFAULT_GLUON_RELEASE := 2016.2.5
+DEFAULT_GLUON_RELEASE := 2016.2.7~exp$(shell date '+%y%m%d%H%M')
+#DEFAULT_GLUON_RELEASE := 2016.2.7
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -61,6 +62,7 @@ export GLUON_BRANCH
 GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
 
+# Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
 GLUON_ATH10K_MESH ?= 11s
 
@@ -95,6 +97,26 @@ USB_PACKAGES_TETHERING := \
 	kmod-usb-net-asix \
 	kmod-usb-net-dm9601-ether
 
+USB_X86_GENERIC_NETWORK_MODULES := \
+	kmod-usb-ohci-pci \
+	kmod-sky2 \
+	kmod-atl2 \
+	kmod-igb \
+	kmod-3c59x \
+	kmod-e100 \
+	kmod-e1000 \
+	kmod-e1000e \
+	kmod-natsemi \
+	kmod-ne2k-pci \
+	kmod-pcnet32 \
+	kmod-8139too \
+	kmod-r8169 \
+	kmod-sis900 \
+	kmod-tg3 \
+	kmod-via-rhine \
+	kmod-via-velocity \
+	kmod-forcedeth
+
 # storage support for USB
 USB_PACKAGES_STORAGE := \
 	block-mount \
@@ -117,26 +139,6 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-iso8859-2 \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
-
-USB_X86_GENERIC_NETWORK_MODULES := \
-	kmod-usb-ohci-pci \
-	kmod-sky2 \
-	kmod-atl2 \
-	kmod-igb \
-	kmod-3c59x \
-	kmod-e100 \
-	kmod-e1000 \
-	kmod-e1000e \
-	kmod-natsemi \
-	kmod-ne2k-pci \
-	kmod-pcnet32 \
-	kmod-8139too \
-	kmod-r8169 \
-	kmod-sis900 \
-	kmod-tg3 \
-	kmod-via-rhine \
-	kmod-via-velocity \
-	kmod-forcedeth
 
 # from ffki-packages:
 USB_PACKAGES_STORAGE += \
@@ -175,4 +177,13 @@ endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_TLWDR4900_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(USB_PACKAGES_STORAGE)
+endif
+
+# from ffm-packages
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_TLWR1043_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR740_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR741_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR841_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR842_SITE_PACKAGES += ffffm-button-bind
 endif
