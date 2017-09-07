@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.x 
+Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.7 
 ================================================================
 
 Freifunk Nord spezifische Änderungen:
