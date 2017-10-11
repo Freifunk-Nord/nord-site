@@ -3,15 +3,48 @@
 
 Freifunk Nord spezifische Änderungen:
 -------------------------------------
-* neuer gluon-quickfix
-* Der Wifi-Taster ist beim TL-WR7/841/2N(D) und beim WR1043 default inaktiv. 
-  man kan die Funktionalität im Config Mode einstellen
+* gluon-quickfix überarbeitet
+* Der Hardware Wifi-Taster ist beim TL-WR741 - 841 - 842N/ND und beim TL-WR1043 per default inaktiv. 
+  Die Funktionalität kann im Config Mode eingestellt werden.
 * Der ssidchanger checkt jetzt eimal alle 60 Minuten
- 
+
+Generelle Änderungen an Gluon 2016.2.7
+--------------------------------------
+* Verbesserter Umgang mit Fehlern beim sysupgrade (#1160)
+* Backport um das kompilieren von Gluon mit Perl 5.26 oder neuer zu ermöglichen (76753ed)
+
+Probleme mit Gluon 2016.2.7
+--------------------------------------
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mitvorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+
+Generelle Änderungen an Gluon 2016.2.6
+--------------------------------------
+* Sicherheitsfix CVE-2016-10229 (#1097)
+* Ein Fehler beim Roamen von Clients wurde behoben (#1121)
+* Ein Fehler beim kombilieren von Gluon mit OpenSSL 1.1 wurde behoben (b6a22ce)
+* Ein Fehler beim kombilieren von Gluon mit langen Dateinamen wurde behoben (#1120)
+* Die sysupgrade wurde komplett überarbeitet (d4a69c0)
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        TP-Link:    TL-WR841N/ND v12,
+
+Probleme mit Gluon 2016.2.6
+--------------------------------------
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mitvorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+
  Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.6.html
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.7.html
+
 
 Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x 
 ================================================================
