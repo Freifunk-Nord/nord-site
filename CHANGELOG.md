@@ -15,7 +15,7 @@ Generelle Änderungen an Gluon 2016.2.7
 
 Probleme mit Gluon 2016.2.7
 --------------------------------------
- * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mitvorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
  * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
    per Hand zu reduzieren. (#496)
 
@@ -25,7 +25,7 @@ Generelle Änderungen an Gluon 2016.2.6
 * Ein Fehler beim Roamen von Clients wurde behoben (#1121)
 * Ein Fehler beim kombilieren von Gluon mit OpenSSL 1.1 wurde behoben (b6a22ce)
 * Ein Fehler beim kombilieren von Gluon mit langen Dateinamen wurde behoben (#1120)
-* Die sysupgrade wurde komplett überarbeitet (d4a69c0)
+* Die sysupgrade Routine wurde komplett überarbeitet (d4a69c0)
 
 Mehr Routermodelle werden unterstützt
 -------------------------------------
@@ -35,7 +35,7 @@ Mehr Routermodelle werden unterstützt
 
 Probleme mit Gluon 2016.2.6
 --------------------------------------
- * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mitvorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
  * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
    per Hand zu reduzieren. (#496)
 
@@ -105,8 +105,10 @@ Generelle Änderungen an Gluon 2016.2.4
 Probleme mit Gluon 2016.2.4
 --------------------------------------
  * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst. (#1010)
- * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
- * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren. (#496)
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit 
+   vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
  
  Offizielle Changelogs zum nachlesen:
 ------------------------------------
