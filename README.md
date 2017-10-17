@@ -10,7 +10,7 @@ https://gluon.readthedocs.org/en/latest/
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
-* 2017.1.1 - Gluon LEDE 2017.1.1
+* 2017.1.3 - Gluon LEDE 2017.1.3
 
 # Download der Firmware
 

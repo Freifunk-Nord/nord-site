@@ -87,6 +87,26 @@ USB_PACKAGES_TETHERING := \
 	kmod-usb-net-asix \
 	kmod-usb-net-dm9601-ether
 
+USB_X86_GENERIC_NETWORK_MODULES := \
+	kmod-usb-ohci-pci \
+	kmod-sky2 \
+	kmod-atl2 \
+	kmod-igb \
+	kmod-3c59x \
+	kmod-e100 \
+	kmod-e1000 \
+	kmod-e1000e \
+	kmod-natsemi \
+	kmod-ne2k-pci \
+	kmod-pcnet32 \
+	kmod-8139too \
+	kmod-r8169 \
+	kmod-sis900 \
+	kmod-tg3 \
+	kmod-via-rhine \
+	kmod-via-velocity \
+	kmod-forcedeth
+
 # storage support for USB
 USB_PACKAGES_STORAGE := \
 	block-mount \
@@ -109,41 +129,47 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-iso8859-2 \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
-
-USB_X86_GENERIC_NETWORK_MODULES := \
-	kmod-usb-ohci-pci \
-	kmod-sky2 \
-	kmod-atl2 \
-	kmod-igb \
-	kmod-3c59x \
-	kmod-e100 \
-	kmod-e1000 \
-	kmod-e1000e \
-	kmod-natsemi \
-	kmod-ne2k-pci \
-	kmod-pcnet32 \
-	kmod-8139too \
-	kmod-r8169 \
-	kmod-sis900 \
-	kmod-tg3 \
-	kmod-via-rhine \
-	kmod-via-velocity \
-	kmod-forcedeth
-
 # from ffki-packages:
-#USB_PACKAGES_STORAGE += \
-#	gluon-usb-media \
-#	gluon-config-mode-usb-media
+USB_PACKAGES_STORAGE += \
+	gluon-usb-media \
+	gluon-config-mode-usb-media
 
 # add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
-#		$(USB_PACKAGES_STORAGE) \
+		$(USB_PACKAGES_STORAGE) \
 		$(USB_PACKAGES_HID) \
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
 		$(USB_PACKAGES_GPS) \
 		$(USB_X86_GENERIC_NETWORK_MODULES)
+endif
+
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043nd-v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wdr4300-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr2543n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_linksys-wrt160nl_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-825-rev-b1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-505-rev-a1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-505-rev-a2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-inet-6408a-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-inet-6416a-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_buffalo-wzr-hp-g450h_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_buffalo-wzr-hp-g300h_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-archer-c7-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
+
+ifeq ($(GLUON_TARGET),mpc85xx-generic)
+	GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
