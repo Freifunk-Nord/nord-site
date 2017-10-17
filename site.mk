@@ -38,10 +38,15 @@ GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
 	gluon-config-mode-hostname-no-pretty
 
+# from T-X alt-esc package:
+GLUON_SITE_PACKAGES += \
+	gluon-alt-esc-client \
+	gluon-alt-esc-provider
+	
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2017.1.3~exp$(shell date '+%y%m%d%H%M')
-DEFAULT_GLUON_RELEASE := 2017.1.3
+DEFAULT_GLUON_RELEASE := 2017.1.3~exp
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
