@@ -17,7 +17,7 @@ rm -Rf $testpath
 mkdir -p $testpath/packages
 cd $testpath/packages
 for feed in $GLUON_SITE_FEEDS; do
-  echo "checking PACKAGES_${feed^^}_REPO ..."
+  echo "####### checking PACKAGES_${feed^^}_REPO ..."
   repo_var=$(echo PACKAGES_${feed^^}_REPO)
   commit_var=$(echo PACKAGES_${feed^^}_COMMIT)
   branch_var=$(echo PACKAGES_${feed^^}_BRANCH)
@@ -36,7 +36,7 @@ for feed in $GLUON_SITE_FEEDS; do
     echo "branch $branch_var missing"
     exit 1
   fi
-  git clone -b "$branch" --single-branch "$repo" $feed
+  git clone -b "$branch" --single-branch --depth=1 "$repo" $feed
   if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
   git checkout "$commit"
