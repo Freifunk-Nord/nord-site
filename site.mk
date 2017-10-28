@@ -42,7 +42,7 @@ GLUON_SITE_PACKAGES += \
 GLUON_SITE_PACKAGES += \
 	gluon-alt-esc-client \
 	gluon-alt-esc-provider
-	
+
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2017.1.3~exp$(shell date '+%y%m%d%H%M')
@@ -147,13 +147,14 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_X86_GENERIC_NETWORK_MODULES)
 endif
 
+# use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163
 ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-	GLUON_tp-link-tl-wr1043nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-	GLUON_tp-link-tl-wr1043nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-	GLUON_tp-link-tl-wr1043nd-v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-tl-wdr4300-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-tl-wr2543n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_linksys-wrt160nl_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
