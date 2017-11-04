@@ -8,7 +8,7 @@ echo "####### validating $P/site.conf ..."
 GLUON_SITEDIR="." lua5.1 tests/site_config.lua
 
 echo "####### validating $P/make-release.sh ..."
-bash -n $P/make-release.sh 
+bash -n $P/make-release.sh
 
 echo "####### validating $P/modules ..."
 source $P/modules
@@ -36,7 +36,7 @@ for feed in $GLUON_SITE_FEEDS; do
     echo "branch $branch_var missing"
     exit 1
   fi
-  git clone -b "$branch" --single-branch --depth=1 "$repo" $feed
+  git clone -b "$branch" --single-branch "$repo" $feed
   if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
   git checkout "$commit"
