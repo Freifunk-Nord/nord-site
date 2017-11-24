@@ -4,8 +4,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-alfred \
 	gluon-autoupdater \
 	gluon-setup-mode \
-        gluon-config-mode-contact-info \
-        gluon-config-mode-geo-location \
+	gluon-config-mode-contact-info \
+	gluon-config-mode-geo-location \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-mesh-vpn \
@@ -26,8 +26,8 @@ GLUON_SITE_PACKAGES := \
 
 # from freifunk nord
 GLUON_SITE_PACKAGES += \
-        ffffng-transfer-once \
-	gluon-au-cleanup
+  ffffng-transfer-once \
+  gluon-au-cleanup
 
 # from eulenfunk:
 GLUON_SITE_PACKAGES += \
@@ -57,7 +57,7 @@ GLUON_SITE_PACKAGES += \
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2016.2.7~exp$(shell date '+%y%m%d%H%M')
-DEFAULT_GLUON_RELEASE := 2016.2.7
+DEFAULT_GLUON_RELEASE := 2016.2.7.1
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
