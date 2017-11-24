@@ -5,7 +5,7 @@
 GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk ssidchanger button ffffngtrans aucleanup'
 
 #	the  git repository from where to clone the package feed
-PACKAGES_AUCLENUP_REPO=https://github.com/Freifunk-Nord/gluon-au-cleanup
+PACKAGES_AUCLEANUP_REPO=https://github.com/Freifunk-Nord/gluon-au-cleanup
 PACKAGES_FFFFNGTRANS_REPO=https://github.com/Freifunk-Nord/ffffng-transfer-once
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
