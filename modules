@@ -2,9 +2,10 @@
 # when building gluon.
 
 #	for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk ssidchanger button ffffngtrans'
+GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk ssidchanger button ffffngtrans aucleanup'
 
 #	the  git repository from where to clone the package feed
+PACKAGES_AUCLENUP_REPO=https://github.com/Freifunk-Nord/gluon-au-cleanup
 PACKAGES_FFFFNGTRANS_REPO=https://github.com/Freifunk-Nord/ffffng-transfer-once
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
@@ -14,6 +15,7 @@ PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.gi
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 
 #	the version/commit of the git repository to clone
+PACKAGES_AUCLEANUP_COMMIT=7d255aa7d93a0356b97431009c8fe3d77d2853b9
 PACKAGES_FFFFNGTRANS_COMMIT=628b735c8a0dd0f28e39f9cec51263fb1a54cba8
 PACKAGES_FFKI_COMMIT=187e200c25fa1497269a3d4daa8d7b4bf6d34c47
 PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
@@ -23,6 +25,7 @@ PACKAGES_SSIDCHANGER_COMMIT=a555c5730ceaf4ba6f86123f9cbc34e4007be23f
 PACKAGES_BUTTON_COMMIT=dc6c431b4e015791517f50d7f3eeaeb0778455b4
 
 # the branch to check out
+PACKAGES_AUCLEANUP_BRANCH=master
 PACKAGES_FFFFNGTRANS_BRANCH=2016.2.x
 PACKAGES_FFKI_BRANCH=master
 PACKAGES_FFHH_BRANCH=master
