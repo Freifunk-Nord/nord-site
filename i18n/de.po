@@ -12,8 +12,6 @@ msgstr ""
 
 msgid "gluon-config-mode:welcome"
 msgstr ""
-"<p>Dein Knoten startet gerade neu und wird anschließend versuchen, "
-"sich mit anderen Freifunk-Knoten in seiner Nähe zu verbinden.</p>"
 "Willkommen zum Einrichtungsassistenten für deinen neuen "
 "Freifunk-Knoten. Fülle das folgende Formular deinen Vorstellungen "
 "entsprechend aus und sende es ab. Der Name dieses Knotens wird der sichtbare "
@@ -44,9 +42,6 @@ msgstr ""
 " <br/>"
 "<%= pubkey %>"
 "</div>"
-"<p>Dein Knoten startet gerade neu und wird anschließend versuchen, "
-"sich mit anderen Freifunkknoten in seiner Nähe "
-"und über deine Internetleitung, online mit einem Freifunk-Server zu verbinden.</p>"
 "<p>Bitte verbinde nun den (meist blauen) WAN Port deines Freifunk Knotens "
 "wieder mit deinem Heimrouter.</p>"
 
@@ -75,8 +70,7 @@ msgstr ""
 "Informationen in eine neue Mail einfügen. Deine E-Mail Adresse wird selbstverständlich vertraulich "
 "behandelt und nicht weitergegeben.</small>"
 "</p>"
-"<p>Dein Knoten startet gerade neu und wird anschließend versuchen, "
-"sich mit anderen Freifunkknoten in seiner Nähe zu verbinden.</p>"
+
 # translations from within default gluon:
 
 msgid "Altitude"
