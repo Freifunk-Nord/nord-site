@@ -55,12 +55,9 @@ msgstr ""
 "This means that your node will only be able to connect to the Freifunk Nord network "
 "if other nodes are within wifi reach.</p>"
 "<p>Please register your node (<em><%= pcdata(hostname) %></em>) and "
-"send an email to <a href="
-"\"mailto:knoten@freifunknord.de?subject=Registration:%20<%= urlescape(hostname) %>&amp;"
-"body=%23%20<%= urlescape(hostname) %>%0A"
-"%23%20<%= sysconfig.primary_mac %>%0A"
-"\">knoten@freifunknord.de</a>."
-"</p>"
+"send an email to <a href=\"mailto:knoten@freifunknord.de?subject=Registration:%20<%= urlescape(hostname) %>&amp;"
+"body=%23%20<%= urlescape(hostname) %>%0A%23%20<%= sysconfig.primary_mac %>%0A"
+"\">knoten@freifunknord.de</a>.</p>"
 
 # translations from within default gluon:
 
