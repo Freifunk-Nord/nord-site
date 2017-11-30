@@ -4,7 +4,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-alfred \
 	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-contact-info \
 	gluon-config-mode-geo-location \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
@@ -48,6 +47,7 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
+	gluon-config-mode-contact-info-anonymous-hint \
 	gluon-config-mode-ppa
 # from ffm-packages
 #GLUON_SITE_PACKAGES += \
