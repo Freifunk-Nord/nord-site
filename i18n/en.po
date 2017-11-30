@@ -28,13 +28,12 @@ msgstr ""
 "<p>This is the public key for your Freifunk node."
 "Please register it by email. "
 "To register the key send it together with your node's name "
-"(<em><%= pcdata(hostname) %></em>) to <a href="
-"\"mailto:knoten@freifunknord.de?"
-"subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
-"body=<%= urlencode( '# ' .. hostname .. '\n# ' .. sysconfig.primary_mac .. '\nkey=') %>"
-"%22<%= pubkey %>%22"
-"<%= urlencode(';\n\nThanks, \n\n') %>"
-"\">knoten@freifunknord.de</a>."
+"(<em><%= pcdata(hostname) %></em>) to a href="
+"\"mailto:knoten@freifunknord.de?subject=registration:%20<%= urlescape(hostname) %>&amp;"
+"body=%23%20<%= urlescape(hostname) %>%0A"
+"%23%20<%= sysconfig.primary_mac %>%0A"
+"key%20%22<%= pubkey %>%22%3B%0A%0A"
+"\">knoten@freifunknord.de</a>.
 "</p>"
 "<div class=\"the-key\">"
 " # <%= pcdata(hostname) %>"
@@ -56,10 +55,11 @@ msgstr ""
 "This means that your node will only be able to connect to the Freifunk Nord network "
 "if other nodes are within wifi reach.</p>"
 "<p>Please register your node (<em><%= pcdata(hostname) %></em>) and"
-"send an email to <a href=\"mailto:knoten@freifunknord.de?"
-"subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
-"body=<%= urlencode('# ' .. hostname .. '\n# ' .. sysconfig.primary_mac .. '\n# no mesh-VPN\n\nThanks, \n\n') %>"
-"\">knoten@freifunknord.de</a>."
+"send an email to <<a href="
+"\"mailto:knoten@freifunknord.de?subject=registration:%20<%= urlescape(hostname) %>&amp;"
+"body=%23%20<%= urlescape(hostname) %>%0A"
+"%23%20<%= sysconfig.primary_mac %>%0A"
+"key%20%22\">knoten@freifunknord.de</a>."
 "</p>"
 
 # translations from within default gluon:
@@ -75,7 +75,6 @@ msgstr ""
 
 msgid "e.g. E-mail or phone number"
 msgstr "e.g. E-mail, chat buddy or phone number"
-
 
 # translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
 
