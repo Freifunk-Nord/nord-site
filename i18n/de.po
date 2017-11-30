@@ -48,7 +48,7 @@ msgstr ""
 msgid "gluon-config-mode:reboot"
 msgstr ""
 "Weitere Informationen zur Freifunk-Nord-Community findest du auf "
-"<a href=\"https://nord.freifunk.net/\">unserer Webseite</a>.</p>"
+"<a href=\"https://nord.freifunk.net/\" target=\"_blank\">unserer Webseite</a>.</p>"
 "<p>Viel Spaß mit deinem Knoten und der Erkundung von Freifunk!</p>"
 
 msgid "gluon-config-mode:nopubkey"
