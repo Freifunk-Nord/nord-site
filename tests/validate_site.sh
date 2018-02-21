@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_BRANCH='v2017.1.4'
+GLUON_BRANCH='v2017.1.5'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
