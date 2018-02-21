@@ -4,8 +4,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-alfred \
 	gluon-autoupdater \
 	gluon-setup-mode \
-        gluon-config-mode-contact-info \
-        gluon-config-mode-geo-location \
+	gluon-config-mode-contact-info \
+	gluon-config-mode-geo-location \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-mesh-vpn \
@@ -25,7 +25,7 @@ GLUON_SITE_PACKAGES := \
 
 # from freifunk nord
 GLUON_SITE_PACKAGES += \
-        ffffng-transfer-once
+	ffffng-transfer-once
 
 # from eulenfunk:
 GLUON_SITE_PACKAGES += \
