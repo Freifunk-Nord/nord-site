@@ -1,4 +1,4 @@
-TODO: Changelog bis 2017.1.5
+TODO: Changelog bis 2017.1.7
 
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
 ================================================================
