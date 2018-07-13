@@ -1,58 +1,58 @@
+# site.mk for Freifunk Nord
+
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
+GLUON_FEATURES := \
+	config-mode-mesh-vpn \
+	web-private-wifi \
+	ebtables-limit-arp \
+	ebtables-filter-multicast \
+	ebtables-filter-ra-dhcp \
+	mesh-batman-adv-15 \
+	mesh-vpn-fastd \
+	radvd \
+	respondd \
+	status-page \
+	web-advanced \
+	web-wizard \
+	autoupdater
+
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-15 \
 	gluon-core \
-	gluon-alfred \
-	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-contact-info \
-	gluon-config-mode-geo-location \
 	gluon-config-mode-core \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn \
-	gluon-ebtables-filter-multicast \
-	gluon-ebtables-filter-ra-dhcp \
-	gluon-web-admin \
-	gluon-web-autoupdater \
-	gluon-web-network \
-	gluon-web-private-wifi \
-	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
-	gluon-radvd \
-	gluon-status-page \
+	gluon-radv-filterd \
+	respondd-module-airtime \
 	iwinfo \
 	iptables \
 	haveged
 
-# from freifunk nord
-GLUON_SITE_PACKAGES += \
-	ffffng-transfer-once
-
-# from eulenfunk:
-GLUON_SITE_PACKAGES += \
-	gluon-quickfix
-#
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
-#
-# from ssidchanger-packages:
+
+# from https://github.com/Freifunk-Nord/eulenfunk-packages
+GLUON_SITE_PACKAGES += \
+	gluon-quickfix
+
+# from https://github.com/Freifunk-Nord/gluon-ssid-changer:
 GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
+#	gluon-config-mode-contact-info-anonymous-hint
 
-# from T-X alt-esc package:
-GLUON_SITE_PACKAGES += \
-	gluon-alt-esc-client \
-	gluon-alt-esc-provider
+# from ffm-packages
+#GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
+#	better at the bottom for only some models
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2017.1.8~exp$(shell date '+%y%m%d')
-DEFAULT_GLUON_RELEASE := 2017.1.8
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1~exp$(shell date '+%y%m%d')
+
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -64,10 +64,18 @@ export GLUON_BRANCH
 GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
 
+# Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
-GLUON_ATH10K_MESH ?= 11s
+
+# enable generation of images for ath10k devices with 802.11s mode
+GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
+
+# basic support the USB stack
+#USB_PACKAGES_BASIC := \
+#	kmod-usb-core \
+#	kmod-usb2
 
 # support for USB UMTS/3G devices
 USB_PACKAGES_3G := \
@@ -179,4 +187,25 @@ endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
+
+# from ffm-packages
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+	GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v9_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
+endif
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
 endif

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_BRANCH='v2017.1.x'
+GLUON_REPO="https://github.com/freifunk-gluon/gluon"
+GLUON_BRANCH='v2018.1.x'
+GLUON_PACKAGES_BRANCH='master'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
@@ -43,10 +45,15 @@ for feed in $GLUON_SITE_FEEDS; do
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
+
+echo "####### downloading github.com/freifunk-gluon/packages ..."
+git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
+
+echo "####### downloading gluon ..."
 cd $testpath
 git init gluon
 cd gluon
-git remote add origin https://github.com/freifunk-gluon/gluon
+git remote add origin $GLUON_REPO
 git config core.sparsecheckout true
 echo "package/*" >> .git/info/sparse-checkout
 git pull --depth=1 origin $GLUON_BRANCH
@@ -54,19 +61,27 @@ cp -a package/ $testpath/packages
 cd $testpath/packages/package
 
 echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
-# ignore standard packages:
-sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged)'> $testpath/site.mk.sh
+# ignore non-gluon packages and standard gluon features
+sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
 while read packet; do
   if [ "$packet" != "" ]; then
-    echo "check $packet ..."
-    if [ "$(find $testpath/packages/ -type d -name "$packet")" '!=' '' ]; then
-      : find found something
+    echo -n "# $packet"
+    FOUND="$(find $testpath/packages/ -type d -name "$packet")"
+    if [ "$FOUND" '!=' '' ]; then
+      echo " found as feature in $(echo $FOUND|sed 's|'$testpath'/packages||g')"
     else
-      echo "ERROR: $packet missing"
-      exit 1
+      # check again with prefix gluon-
+      FOUND="$(find $testpath/packages/ -type d -name "gluon-$packet")"
+      if [ "$FOUND" '!=' '' ]; then
+        echo " found in $(echo $FOUND|sed 's|'$testpath'/packages||g')"
+      else
+        echo
+        echo "ERROR: $packet missing"
+        exit 1
+      fi
     fi
   fi
 done

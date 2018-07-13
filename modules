@@ -1,30 +1,26 @@
 # This file allows specifying additional repositories to use
 # when building gluon.
 
-GLUON_SITE_FEEDS='ffki eulenfunk ssidchanger sargon alt ffffngtrans'
+# for each feed name given, add the corresponding PACKAGES_* lines
+GLUON_SITE_FEEDS='ffki sargon eulenfunk ssidchanger button'
 
 # the git repository from where to clone the package feed
-PACKAGES_FFFFNGTRANS_REPO=https://github.com/Freifunk-Nord/ffffng-transfer-once
-PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
-PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
-PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git
+PACKAGES_FFKI_REPO=https://github.com/freifunk-kiel/ffki-packages
 PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon
-PACKAGES_ALT_REPO=https://github.com/rubo77/gluon-alt-esc
+PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
+PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
+PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 
-# the version/commit of the git repository to clone
-
-PACKAGES_FFFFNGTRANS_COMMIT=b3af1f128af3787e90b1f19f8bc174c0bb2d9f06
-PACKAGES_FFKI_COMMIT=59df8ebf69ccf5ad2ed77c5b93d59f04a0e18e10
+#	the version/commit of the git repository to clone
+PACKAGES_FFKI_COMMIT=80495abe38a623d4241cffa1add24096c1abc6db
+PACKAGES_SARGON_COMMIT=4e84477564ffc67cb2cf690edc8dea37d6fe0cad
 PACKAGES_EULENFUNK_COMMIT=a4be61c88e4628d3f039510c86cd20fe7f417261
-PACKAGES_SSIDCHANGER_COMMIT=3d15977d25d07c039680f0ace4c98c8c5223a9e9
-PACKAGES_SARGON_COMMIT=d98991c27d1d19d01a485c9f1a3082e8c844a3e4
-PACKAGES_ALT_COMMIT=796302e274495564549fd43a237552f992fd51df
+PACKAGES_SSIDCHANGER_COMMIT=222b96a30259a03ca8ecdb173d9d326077a6efec
+PACKAGES_BUTTON_COMMIT=1abb767553429bac6a7031ac6882dce7ce225013
 
 # the branch to check out
-
-PACKAGES_FFFFNGTRANS_BRANCH=master
-PACKAGES_FFKI_BRANCH=lede
+PACKAGES_FFKI_BRANCH=2018.1.x
+PACKAGES_SARGON_BRANCH=v2018.x
 PACKAGES_EULENFUNK_BRANCH=lede
-PACKAGES_SSIDCHANGER_BRANCH=2017.1.x
-PACKAGES_SARGON_BRANCH=master
-PACKAGES_ALT_BRANCH=master
+PACKAGES_SSIDCHANGER_BRANCH=2018.1.x
+PACKAGES_BUTTON_BRANCH=2018.1.x

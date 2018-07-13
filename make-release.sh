@@ -4,7 +4,7 @@
 ## manifest and sign it. For that, you must have cloned gluon and have a
 ## valid site config. Additionally, the signing key must be present in
 ## ../../ecdsa-key-secret or defined as first argument.
-## The second argument defines the branch (stable, beta, experimental).
+## The second argument defines the branch (stable, rc, nightly).
 ## The third argument defines the version.
 ## Call from site directory with the version and branch variables
 ## properly configured in this script.
@@ -14,10 +14,9 @@ set -u
 # stop on first error (not working in if clauses)
 set -e
 
-# if version is unset, will use the default experimental version from site.mk
-#VERSION=${3:-"2017.1.8~exp$(date '+%y%m%d%H%M')"}
-VERSION=${3:-"2017.1.8~exp"}
-# branch must be set to either experimental, beta or stable
+# if version is unset, will use the default version from site.mk
+VERSION=${3:-"2018.1~exp$(date '+%y%m%d%H%M')"}
+# branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
@@ -35,12 +34,12 @@ MAKE_CLEAN="1"
 # set this to "V=s" to get more output
 VERBOSE=""
 
-#ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-tiny ar71xx-generic"
+ONLY_TARGET="ar71xx-generic ar71xx-tiny"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-DEVICES=""
-#DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
+DEVICES=''
+#DEVICES='DEVICES="tp-link-tl-wr842n-nd-v1 tp-link-tl-wr842n-nd-v2 tp-link-tl-wr842n-nd-v3"'
 
 cd ../
 if [ ! -d "site" ]; then
@@ -54,7 +53,7 @@ if [ "$(whoami)" == "root" ]; then
 fi
 
 if [ -d ../openwrt/ ]; then
-  echo openwrt was checked out, this will break, if you build master now
+  echo openwrt was checked out, this will break, if you build v2018.1.x now
 fi
 
 echo "############## starting build process #################" >> build.log
@@ -113,14 +112,7 @@ echo "Compilation complete, creating manifest(s)" | tee -a build.log
 set +e
 MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
 if [[ true ]]; then
-  B="experimental"
-  echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
-  make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
-  echo -e "\n\n\n============================================================\n\n" >> build.log
-fi
-
-if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]; then
-  B="beta"
+  B="nightly"
   echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
   make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
   echo -e "\n\n\n============================================================\n\n" >> build.log
@@ -135,12 +127,14 @@ fi
 
 echo "Manifest creation complete, signing manifest"
 
-echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/experimental.manifest" >> build.log
-contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/experimental.manifest >> build.log 2>&1
+echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest" >> build.log
+contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.log 2>&1
 
-if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]; then
-  echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/beta.manifest" >> build.log
-  contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/beta.manifest >> build.log 2>&1
+if [[ "$BRANCH" == "nightly" ]] || [[ "$BRANCH" == "stable" ]]; then
+  echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest" >> build.log
+  contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.log 2>&1
+  # set date to before 04:00
+  sed -e 's/DATE=.*/DATE='$(date '+%y-%m-%d')' 00:00:00+02:00/g' output/images/sysupgrade/nightly.manifest
 fi
 
 if [[ "$BRANCH" == "stable" ]]; then
