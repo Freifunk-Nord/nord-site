@@ -183,6 +183,7 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_buffalo-wzr-hp-g450h_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_buffalo-wzr-hp-g300nh_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-archer-c7-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-ar300m_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
