@@ -95,9 +95,6 @@ msgid "gluon-config-mode:altitude-help"
 msgstr ""
 "Die Höhenangabe ist optional und kann geschätzt werden mit 3m pro Stockwerk."
 
-
-# translations from within default gluon:
-
 msgid "gluon-config-mode:contact-note"
 msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
 
