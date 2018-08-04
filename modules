@@ -12,7 +12,7 @@ PACKAGES_FFKI_BRANCH=2018.1.x
 # ddhcpd and roamguide
 PACKAGES_SARGON_REPO=https://github.com/TobleMiner/gluon-sargon
 PACKAGES_SARGON_COMMIT=5d4ce7eda7d6a1624be4a5150cb5c477d4082e0a
-PACKAGES_SARGON_BRANCH=feature-respondd-gateway-update
+PACKAGES_SARGON_BRANCH=v2018.x
 
 # gluon-quickfix
 PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
@@ -26,5 +26,5 @@ PACKAGES_SSIDCHANGER_BRANCH=2018.1.x
 
 # ffffm-button-bind
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
-PACKAGES_BUTTON_COMMIT=701bd39df1f906e13a6a87ccdb586fe51c991d37
+PACKAGES_BUTTON_COMMIT=2d7fcbb9f6dd24085b02f66155ad1eddfaefc7c5
 PACKAGES_BUTTON_BRANCH=2018.1.x
