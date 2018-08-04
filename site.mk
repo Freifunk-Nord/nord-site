@@ -11,6 +11,7 @@ GLUON_FEATURES := \
 	mesh-vpn-fastd \
 	radvd \
 	respondd \
+	web-mesh-vpn-fastd \
 	status-page \
 	web-advanced \
 	web-wizard \
