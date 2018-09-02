@@ -29,8 +29,7 @@ GLUON_SITE_PACKAGES := \
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
-	roamguide \
-	ddhcpd
+	roamguide
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
 GLUON_SITE_PACKAGES += \
@@ -53,7 +52,7 @@ GLUON_SITE_PACKAGES += \
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1.0~exp$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.1.1~exp$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
