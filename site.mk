@@ -17,9 +17,6 @@ GLUON_FEATURES := \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
-	gluon-core \
-	gluon-setup-mode \
-	gluon-config-mode-core \
 	gluon-radv-filterd \
 	respondd-module-airtime \
 	iwinfo \
