@@ -9,6 +9,7 @@ GLUON_FEATURES := \
 	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radvd \
+	radv-filterd \
 	respondd \
 	web-mesh-vpn-fastd \
 	status-page \
@@ -17,7 +18,6 @@ GLUON_FEATURES := \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
-	gluon-radv-filterd \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
