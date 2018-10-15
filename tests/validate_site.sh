@@ -2,7 +2,7 @@
 
 # validate_site.sh checks if the site.conf is valid json
 GLUON_REPO="https://github.com/freifunk-gluon/gluon"
-GLUON_BRANCH='v2018.1.x'
+GLUON_BRANCH='master'
 GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
 GLUON_PACKAGES_BRANCH='master'
 
@@ -73,9 +73,10 @@ cd $testpath/packages/package
 
 echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 # ignore non-gluon packages and standard gluon features
-sed '0,/^GLUON_LANGS/d' $P/site.mk | sed '/GLUON_TARGET/,$d' | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|tar|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> $testpath/site.mk.sh
+sed '0,/^GLUON_LANGS/d' $P/site.mk | sed '/GLUON_TARGET/,$d' | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|tar|mesh-batman-adv-1[45]|web-advanced|web-wizard|-gluon-)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
+sed -i 's/gluon-config-mode-geo-location-with-map/gluon-config-mode-geo-location/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
 while read packet; do
   if [ "$packet" != "" ]; then

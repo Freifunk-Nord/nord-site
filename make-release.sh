@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-VERSION=${3:-"2018.1.0~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.2.0.0~exp$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -31,15 +31,15 @@ CORES="-j$CORES"
 # set this to "0" if you don't want to use make clean before make
 MAKE_CLEAN="1"
 
-# set this to "V=s" to get more output
-VERBOSE=""
+# set this to "" to get less more output
+VERBOSE="V=s"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-generic ar71xx-tiny ramips-mt76x8"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=''
-#DEVICES='DEVICES="tp-link-tl-wr842n-nd-v1 tp-link-tl-wr842n-nd-v2 tp-link-tl-wr842n-nd-v3"'
+#DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
 
 cd ../
 if [ ! -d "site" ]; then
@@ -60,7 +60,7 @@ echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
 echo "see debug output with"
-echo "tail -F ../build.log &"
+echo "tail -F ../build.log|grep -i error|grep -v CFLAGS|egrep -v '(checking|CC|LD|gcc|Entering|leaving|v -f|rm -rf|cp -f|rm -f|Applying|patching|Installing)' &"
 sleep 3
 
 #rm -r output
