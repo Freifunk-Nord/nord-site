@@ -73,7 +73,7 @@ cd $testpath/packages/package
 
 echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 # ignore non-gluon packages and standard gluon features
-sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|tar|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> $testpath/site.mk.sh
+sed '0,/^GLUON_LANGS/d' $P/site.mk | sed '/GLUON_TARGET/,$d' | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|tar|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
