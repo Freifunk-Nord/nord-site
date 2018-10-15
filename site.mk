@@ -3,7 +3,7 @@
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1.1~exp$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.2.0.0~exp$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -25,8 +25,8 @@ GLUON_LANGS ?= en de
 
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
 GLUON_FEATURES := \
+	config-mode-geo-location-osm \
 	web-private-wifi \
-	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
 	mesh-batman-adv-15 \
@@ -63,6 +63,12 @@ GLUON_SITE_PACKAGES += \
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
 #	gluon-config-mode-contact-info-anonymous-hint
+
+
+# from T-X alt-esc package:
+#GLUON_SITE_PACKAGES += \
+#	gluon-alt-esc-client \
+#	gluon-alt-esc-provider
 
 # from ffm-packages
 GLUON_SITE_PACKAGES += \
