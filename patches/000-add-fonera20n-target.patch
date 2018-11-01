@@ -1,0 +1,14 @@
+diff --git a/targets/ramips-rt305x b/targets/ramips-rt305x
+index 5f1c979e..09c91e3d 100644
+--- a/targets/ramips-rt305x
++++ b/targets/ramips-rt305x
+@@ -21,3 +21,9 @@ factory
+ 
+ device vocore-16M vocore-16M
+ factory
++
++# Fonera
++
++device la-fonera-2.0n fonera20n
++# Alternate name
++alias fonera20n
