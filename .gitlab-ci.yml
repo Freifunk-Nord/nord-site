@@ -1,0 +1,74 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SSL_CAPATH: /etc/ssl/certs/
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
+  GLUON_GIT: https://github.com/freifunk-gluon/gluon.git/
+  GLUON_BRANCH: master
+  BROKEN: BROKEN=1
+
+cache:
+  key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
+  paths:
+    - gluon
+
+stages:
+  - prepare
+  - build
+  - upload
+
+# Preparation
+
+prepare:
+  stage: prepare
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CONTAINER_IMAGE:latest || true
+    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_COMMIT_SHA -t $CONTAINER_IMAGE:latest .gitlab-ci/build-container
+    - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
+    - docker push $CONTAINER_IMAGE:latest
+  cache: {}
+
+# Actual building
+build:
+  stage: build
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - export FORCE_UNSAFE_CONFIGURE=1
+      # former clone step
+    - ./.gitlab-ci/update-git.sh | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+      # We should never need this, should we?
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+      # In the past this build step repeatedly broke
+    # - ./.gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+      # Bring gluon repo to cacheable state
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+      # Sign
+    - echo $SIGNING_KEY > signing_key
+    - ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+  artifacts:
+    untracked: false
+    paths:
+      - debug.log
+      - output
+    expire_in: 1 day
+    when: always
+  dependencies: []
+
+upload:
+  stage: upload
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_KEY")
+      # create fake gluon dir to satisfy build script
+    - mkdir -p gluon
+    - ./.gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
+  dependencies:
+    - build
+  cache: {}
