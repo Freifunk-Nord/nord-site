@@ -1,0 +1,29 @@
+diff --git a/targets/ramips-rt305x b/targets/ramips-rt305x
+index 09c91e3d..4e3b5854 100644
+--- a/targets/ramips-rt305x
++++ b/targets/ramips-rt305x
+@@ -1,17 +1,17 @@
+ # A5
+ 
+-device a5-v11 a5-v11
++#device a5-v11 a5-v11
+ 
+ 
+ # D-Link
+ 
+-device d-link-dir-615-h1 dir-615-h1
++#device d-link-dir-615-h1 dir-615-h1
+ 
+-device d-link-dir-615-d dir-615-d
+-alias d-link-dir-615-d1
+-alias d-link-dir-615-d2
+-alias d-link-dir-615-d3
+-alias d-link-dir-615-d4
++#device d-link-dir-615-d dir-615-d
++#alias d-link-dir-615-d1
++#alias d-link-dir-615-d2
++#alias d-link-dir-615-d3
++#alias d-link-dir-615-d4
+ 
+ 
+ # VoCore
