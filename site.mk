@@ -78,6 +78,14 @@ GLUON_SITE_PACKAGES += \
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES = -ffffm-button-bind
 endif
+# a5-v11 gets too large
+ifeq ($(GLUON_TARGET),ramips-rt305x)
+	GLUON_a5-v11_SITE_PACKAGES += \
+	 -ffffm-button-bind \
+	 -gluon-config-mode-ppa \
+	 -config-mode-geo-location-osm \
+	 -status-page
+endif
 
 # support for USB UMTS/3G devices
 USB_PACKAGES_3G := \

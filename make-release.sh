@@ -84,6 +84,11 @@ X86="x86-64 x86-generic x86-xen_domu"
 WDR4900="mpc85xx-generic"
 
 TARGETS="ar71xx-generic $ONLY_LEDE ar71xx-nand $WDR4900 $RASPBPI $X86"
+
+# redefine all targets:
+TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi-cortexa7 x86-generic x86-geode x86-64 ipq40xx ramips-mt7620 ar71xx-mikrotik brcm2708-bcm2710 ipq806x mvebu-cortexa9 ramips-mt76x8"
+#TARGETS+="ramips-rt305x" // file for a5-v11 gets too big!
+
 if [ "$BROKEN" != "" ]; then
   TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
 fi
