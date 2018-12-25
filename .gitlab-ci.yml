@@ -42,10 +42,13 @@ build:
     - ./.gitlab-ci/update-git.sh | tee -a debug.log
     - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
       # We should never need this, should we?
-    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
-      # In the past this build step repeatedly broke
-    # - ./.gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+      # Apply patches
+    - ./.gitlab-ci/patch.sh patches gluon
+      # Build
     - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+      # Revert patches
+    - ./.gitlab-ci/patch.sh -r patches gluon
       # Bring gluon repo to cacheable state
     - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
       # Sign
