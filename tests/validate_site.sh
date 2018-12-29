@@ -3,7 +3,7 @@ set -uo pipefail
 
 # validate_site.sh checks if the site.conf is valid json
 GLUON_REPO="https://github.com/freifunk-gluon/gluon"
-GLUON_BRANCH='master'
+GLUON_BRANCH='v2018.2.x'
 GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
 GLUON_PACKAGES_BRANCH='master'
 
