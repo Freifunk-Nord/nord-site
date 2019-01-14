@@ -1,4 +1,4 @@
-# site.mk for Freifunk Nord
+# site.mk for Freifunk Nord Kreis Steinburg
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
@@ -38,6 +38,7 @@ GLUON_FEATURES := \
 	status-page \
 	web-advanced \
 	web-wizard \
+	web-mesh-vpn-fastd \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
