@@ -53,10 +53,6 @@ if [ "$(whoami)" == "root" ]; then
   return
 fi
 
-if [ -d ../openwrt/ ]; then
-  echo openwrt was checked out, this will break, if you build v2018.1.x now
-fi
-
 echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
