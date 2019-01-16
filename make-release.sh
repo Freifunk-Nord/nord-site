@@ -15,8 +15,8 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-#VERSION=${3:-"2018.2.0.2~exp$(date '+%y%m%d%H%M')"}
-VERSION=${3:-"2018.2.0.2"}
+#VERSION=${3:-"2018.2.0.3~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.2.0.3"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
