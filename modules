@@ -11,7 +11,7 @@ PACKAGES_FFKI_BRANCH=2018.1.x
 
 # ddhcpd and roamguide
 PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon.git
-PACKAGES_SARGON_COMMIT=98b199124e82d2dd7cf5af8b0c8b3b8d90276224
+PACKAGES_SARGON_COMMIT=22dfddb23e40d4370635229ede50bc0018a3ec84
 PACKAGES_SARGON_BRANCH=master
 
 # gluon-quickfix
