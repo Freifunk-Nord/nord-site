@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -uo pipefail
 
 # validate_site.sh checks if the site.conf is valid json
@@ -8,20 +8,34 @@ GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
 GLUON_PACKAGES_BRANCH='master'
 
 P="$(pwd)"
-echo "####### validating $P/site.conf ..."
+echo "####### check if lua5.1 is installed ..."
 which lua5.1 
 if [ "$?" == 1 ]; then
   echo lua5.1 not present!
   echo install with sudo apt install lua5.1
   exit 1
 fi
-GLUON_SITEDIR="." lua5.1 tests/site_config.lua
-if [ "$?" == 1 ]; then
-  exit 1
+CONFIGS="site.conf"
+if [ -d "domains" ]; then
+  CONFIGS="$CONFIGS "domains/*
 fi
+
+for c in $CONFIGS; do
+  echo "####### validating lua $c ..."
+  GLUON_SITEDIR="." GLUON_SITE_CONFIG="$c" lua5.1 tests/site_config.lua
+  if [ "$?" == 1 ]; then
+    exit 1
+  else
+    echo "OK: $c"
+  fi
+done
+#GLUON_SITEDIR="./" GLUON_SITE_CONFIG="" lua5.1 tests/site_config.lua
 
 echo "####### validating $P/make-release.sh ..."
 bash -n "$P/make-release.sh"
+if [ "$?" == 0 ]; then
+  echo "OK: $P/make-release.sh"
+fi
 
 echo "####### validating $P/modules ..."
 GLUON_SITE_FEEDS="none"
