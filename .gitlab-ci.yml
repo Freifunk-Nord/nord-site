@@ -51,9 +51,9 @@ build:
     - ./.gitlab-ci/patch.sh -r patches gluon
       # Bring gluon repo to cacheable state
     - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" 2>&1 | tee -a debug.log
-      # Sign
-    - echo $SIGNING_KEY > signing_key
-    - ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+      # Sign (not in Nord)
+    #- echo $SIGNING_KEY > signing_key
+    #- ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
