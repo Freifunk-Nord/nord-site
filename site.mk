@@ -160,7 +160,9 @@ USB_PACKAGES_STORAGE += \
 
 # extra packages for fat clients
 FAT_PACKAGES := \
-	tcpdump
+	tcpdump \
+	gre \
+	wireguard
 
 # add addition network drivers and usb stuff only to targets where disk space does not matter
 ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
