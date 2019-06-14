@@ -11,7 +11,7 @@
 #   - Freifunk Fulda for the base of the gitlab-ci support
 # =====================================================================
 
-# Default make options
+# Default make options (override with -m)
 MAKEOPTS="-j 4"
 
 # Default is set to use current work directory
@@ -278,7 +278,6 @@ build() {
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
              GLUON_RELEASE="${RELEASE}" \
              GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
@@ -289,7 +288,6 @@ build() {
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
              GLUON_RELEASE="${RELEASE}" \
              GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_TARGET="${TARGET}"
@@ -308,9 +306,6 @@ build() {
 
   cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
-
-  # Prevent premature downloads
-  echo "deny from all" > "${SITEDIR}/output/images/sysupgrade/.htaccess"
 
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
@@ -358,7 +353,7 @@ upload() {
 
   # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
   echo "Compressing images..."
-  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade other
 
   # Copy images to server
   echo "Uploading images..."
@@ -387,6 +382,12 @@ upload() {
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+      ln -sf \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/other" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
