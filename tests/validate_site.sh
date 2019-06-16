@@ -15,6 +15,7 @@ if [ "$?" == 1 ]; then
   echo install with sudo apt install lua5.1
   exit 1
 fi
+
 CONFIGS="site.conf"
 if [ -d "domains" ]; then
   CONFIGS="$CONFIGS "domains/*
@@ -72,6 +73,9 @@ for feed in $GLUON_SITE_FEEDS; do
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
+
+echo "####### Lua linter check fo all package feeds ..."
+~/.luarocks/bin/luacheck --config "$P/tests/.luacheckrc" "$testpath/packages"
 
 echo "####### downloading $GLUON_PACKAGES_REPO ..."
 git clone -b "$GLUON_PACKAGES_BRANCH" --depth 1  --single-branch "$GLUON_PACKAGES_REPO"
