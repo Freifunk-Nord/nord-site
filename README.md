@@ -1,16 +1,13 @@
-# Validation
+Firmware Site Config for Freifunk Nord
+--------------------------------------
 
-You can validate your changes to this repository by calling the validate_site.sh file with
-
-    tests/validate_site.sh
-
-# Dokumentation
-
+You can always find
+the latest gluon documentation at:
 https://gluon.readthedocs.org/en/latest/
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
-* 2018.2.0.3 - Gluon 2018.2.x
+* 2019.1 - Gluon v2019.1.x
 
 # Download der Firmware
 
@@ -80,12 +77,17 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
 
        make clean GLUON_TARGET=$TARGET
 
-## debug
+# Development
 
-you can debug lua scripts in modules with 
+## Validation and debug
+
+You can validate your changes to this repository by calling the validate_site.sh file with
+
+    tests/validate_site.sh
+
+You can debug lua scripts in modules with 
 
     apt install luarocks
     luarocks install --local luacheck
     tests/validate_site.sh
     ~/.luarocks/bin/luacheck --config "tests/.luacheckrc" /tmp/site-validate/|grep "(E"
-

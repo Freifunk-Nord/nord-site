@@ -3,9 +3,9 @@ set -uo pipefail
 
 # validate_site.sh checks if the site.conf is valid json
 GLUON_REPO="https://github.com/freifunk-gluon/gluon"
-GLUON_BRANCH='v2018.2.x'
+GLUON_BRANCH='v2019.1.x'
 GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
-GLUON_PACKAGES_BRANCH='master'
+GLUON_PACKAGES_BRANCH='v2019.1.x'
 
 P="$(pwd)"
 echo "####### check if lua5.1 is installed ..."
@@ -74,7 +74,7 @@ for feed in $GLUON_SITE_FEEDS; do
   cd -
 done
 
-echo "####### Lua linter check fo all package feeds ..."
+echo "####### Lua linter check for all package feeds ..."
 ~/.luarocks/bin/luacheck --config "$P/tests/.luacheckrc" "$testpath/packages"
 
 echo "####### downloading $GLUON_PACKAGES_REPO ..."
