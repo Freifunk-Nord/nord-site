@@ -79,3 +79,13 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
   3.2 Build Verzeichnis säubern
 
        make clean GLUON_TARGET=$TARGET
+
+## debug
+
+you can debug lua scripts in modules with 
+
+    apt install luarocks
+    luarocks install --local luacheck
+    tests/validate_site.sh
+    ~/.luarocks/bin/luacheck --config "tests/.luacheckrc" /tmp/site-validate/|grep "(E"
+
