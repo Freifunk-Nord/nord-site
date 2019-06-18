@@ -6,8 +6,8 @@ variables:
   GLUON_BRANCH: v2018.2.x
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
-  # set to '' or 'V=s BUILD_LOG=1'
-  VERBOSE: 'V=s BUILD_LOG=1'
+  # set to '', 'V=s' or 'V=s BUILD_LOG=1'
+  VERBOSE: ''
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
