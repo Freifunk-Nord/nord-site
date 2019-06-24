@@ -43,13 +43,14 @@ build:
     - export FORCE_UNSAFE_CONFIGURE=1
       # set make options to max number of cores or -j1 if verbose is set
     - if [ -n "$VERBOSE" ]; then MAKEOPTS="-j 1 $VERBOSE"; else MAKEOPTS="-j $(nproc --all)"; fi
-    - MAKEOPTS="$MAKEOPTS $BROKEN"
+    - MAKEOPTS="$MAKEOPTS $BROKEN GLUON_DEPRECATED=$DEPRECATED"
     - 'echo "building with those options: $MAKEOPTS"'
       # former clone step
+    - set -x
     - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
     - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # We should never need this, should we?
-    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Apply patches
     - ./.gitlab-ci/patch.sh patches gluon
       # Build
