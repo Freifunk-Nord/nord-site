@@ -207,14 +207,14 @@ if [[ -z "${COMMAND}" ]]; then
   exit ${E_ILLEGAL_ARGS}
 fi
 
+# Normalize the branch name
+BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
+BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
+
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
   RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
 fi
-
-# Normalize the branch name
-BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
-BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
