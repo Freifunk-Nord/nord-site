@@ -214,6 +214,17 @@ BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
   RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
+  case "${BRANCH}" in
+    nightly)
+      RELEASE="${RELEASE}~ngly"
+      ;;
+    next)
+      RELEASE="${RELEASE}~next"
+      ;;
+    *)
+      # Do nothing
+      ;;
+  esac
 fi
 
 # Get the GIT commit description
