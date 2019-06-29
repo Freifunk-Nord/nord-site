@@ -44,7 +44,7 @@ build:
       # set make options to max number of cores or -j1 if verbose is set
     - if [ -n "$VERBOSE" ]; then MAKEOPTS="-j 1 $VERBOSE"; else MAKEOPTS="-j $(nproc --all)"; fi
     - MAKEOPTS="$MAKEOPTS $BROKEN GLUON_DEPRECATED=$DEPRECATED"
-    - 'echo "building with those options: $MAKEOPTS"'
+    - echo Build options: "$MAKEOPTS"
       # former clone step
     - set -x
     - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
