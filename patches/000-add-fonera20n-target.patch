@@ -1,14 +1,14 @@
 diff --git a/targets/ramips-rt305x b/targets/ramips-rt305x
-index 5f1c979e..09c91e3d 100644
+index b3f8c89..a1f711f 100644
 --- a/targets/ramips-rt305x
 +++ b/targets/ramips-rt305x
-@@ -21,3 +21,9 @@ factory
- 
- device vocore-16M vocore-16M
- factory
+@@ -33,3 +33,9 @@ device('vocore-8M', 'vocore-8M', {
+ device('vocore-16M', 'vocore-16M', {
+       factory = false,
+ })
 +
-+# Fonera
++-- La Fonera
 +
-+device la-fonera-2.0n fonera20n
-+# Alternate name
-+alias fonera20n
++device('la-fonera-2.0n','fonera20n', {
++      aliases = { 'fonera20n' }
++})
