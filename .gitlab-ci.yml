@@ -68,7 +68,7 @@ build:
       - debug.*
       - output
       - gluon/openwrt/logs/*
-    expire_in: 1 day
+    expire_in: 3 days
     when: always
   dependencies: []
 
