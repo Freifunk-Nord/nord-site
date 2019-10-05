@@ -2,7 +2,7 @@
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2018.2
+DEFAULT_GLUON_RELEASE := 2019.1
 #DEFAULT_GLUON_RELEASE := 2018.2~exp$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
@@ -30,12 +30,12 @@ GLUON_FEATURES := \
 	web-private-wifi \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
+	ebtables-limit-arp \
 	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radvd \
 	radv-filterd \
 	respondd \
-	web-mesh-vpn-fastd \
 	status-page \
 	web-advanced \
 	web-wizard \
