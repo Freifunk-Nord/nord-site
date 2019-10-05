@@ -29,7 +29,6 @@ GLUON_FEATURES := \
 	web-private-wifi \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
-	ebtables-limit-arp \
 	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radv-filterd \
