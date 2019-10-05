@@ -4,7 +4,6 @@ variables:
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/freifunk-gluon/gluon.git
   GLUON_BRANCH: v2018.2.x
-  BROKEN: BROKEN=1
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
@@ -38,27 +37,32 @@ build:
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
+      # set make options to max number of cores or -j1 if verbose is set
+    - if [ -n "$VERBOSE" ]; then MAKEOPTS="-j 1 $VERBOSE"; else MAKEOPTS="-j $(nproc --all)"; fi
+    - MAKEOPTS="$MAKEOPTS $BROKEN"
+    - 'echo "building with those options: $MAKEOPTS"'
       # former clone step
-    - ./.gitlab-ci/update-git.sh | tee -a debug.log
-    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+    - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # We should never need this, should we?
-    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" 2>&1 | tee -a debug.log
       # Apply patches
     - ./.gitlab-ci/patch.sh patches gluon
       # Build
-    - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c build  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Revert patches
     - ./.gitlab-ci/patch.sh -r patches gluon
       # Bring gluon repo to cacheable state
-    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) $BROKEN" | tee -a debug.log
-      # Sign
-    - echo $SIGNING_KEY > signing_key
-    - ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
+      # Sign (not in Nord)
+    #- echo $SIGNING_KEY > signing_key
+    #- ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
-      - debug.log
+      - debug.*
       - output
+      - gluon/openwrt/logs/*
     expire_in: 1 day
     when: always
   dependencies: []

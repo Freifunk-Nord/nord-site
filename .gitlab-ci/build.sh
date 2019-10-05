@@ -11,22 +11,8 @@
 #   - Freifunk Fulda for the base of the gitlab-ci support
 # =====================================================================
 
-# Default make options
-MAKEOPTS="V=s -j 4"
-
-# Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-tiny ar71xx-generic x86-64 ar71xx-nand x86-generic x86-64"
-TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-TARGETS+=" sunxi-cortexa7" # Banana Pi (M1)
-
-# BROKEN:
-TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx ramips-mt7620 ramips-mt7621 x86-geode"
-TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
-TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
-TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
-TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
-TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
+# Default make options (override with -m)
+MAKEOPTS="-j 4"
 
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
@@ -46,10 +32,13 @@ SIGNKEY=""
 E_ILLEGAL_ARGS=126
 
 # Help function used in error messages and -h option
+
 usage() {
   echo ""
   echo "Build script for Freifunk-Fulda gluon firmware."
   echo ""
+  echo "-a: Autoupdater branch name (e.g. development)"
+  echo "    Default: branch (see -b)"
   echo "-b: Firmware branch name (e.g. development)"
   echo "    Default: current git branch"
   echo "-c: Build command: update | clean | download | build | sign | upload | prepare"
@@ -61,6 +50,8 @@ usage() {
   echo "    Default: \"${BUILD}\""
   echo "-t: Gluon targets architectures to build"
   echo "    Default: \"${TARGETS}\""
+  echo "-u: Upload target"
+  echo "    Default: branch (see -b)"
   echo "-r: Release number (optional)"
   echo "    Default: fetched from release file"
   echo "-w: Path to site directory"
@@ -76,10 +67,16 @@ if [[ "${#}" == 0 ]]; then
 fi
 
 # Evaluate arguments for build script.
-while getopts b:c:dhm:n:t:w:s: flag; do
+while getopts a:b:c:dhm:n:t:u:w:s: flag; do
   case ${flag} in
+    a)
+        AU_BRANCH="${OPTARG}"
+        ;;
     b)
         BRANCH="${OPTARG}"
+	if [ "${BRANCH}" == "release-candidate" ] ; then
+          BRANCH="rc"
+	fi
         ;;
     c)
       case "${OPTARG}" in
@@ -127,6 +124,9 @@ while getopts b:c:dhm:n:t:w:s: flag; do
     t)
       TARGETS="${OPTARG}"
       ;;
+    u)
+      UPLOAD_TARGET="${OPTARG}"
+      ;;
     r)
       RELEASE="${OPTARG}"
       ;;
@@ -149,7 +149,7 @@ shift $((OPTIND - 1));
 
 # Check if there are remaining arguments
 if [[ "${#}" > 0 ]]; then
-  echo "Error: To many arguments: ${*}"
+  echo "Error: Too many arguments: ${*}"
   usage
   exit ${E_ILLEGAL_ARGS}
 fi
@@ -161,6 +161,45 @@ if [[ -z "${BRANCH}" ]]; then
   BRANCH=${BRANCH:-HEAD}
 fi
 
+# Default to build branch specific targets if parameter -t is not set 
+if [[ -z ${TARGETS+x} ]] ; then
+  case "${BRANCH}" in
+    stable)
+      TARGETS="ar71xx-tiny ar71xx-generic"
+      TARGETS+=" x86-64 x86-generic" # (VMs)
+      TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
+      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
+      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
+
+      # BROKEN:
+      #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710" # (raspberry Pi 1, 2 und 3)
+      TARGETS+=" ipq40xx" # (FitzBox 4040)
+      #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
+      TARGETS+=" x86-geode"
+      #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
+      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
+      #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
+      #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
+      ;;
+    *)
+      # Default to all targets
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 ipq40xx"
+      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+    ;;
+  esac
+fi
+
+if [[ -z "$AU_BRANCH" ]]; then
+  AU_BRANCH="$BRANCH"
+fi
+
+if [[ -z "$UPLOAD_TARGET" ]]; then
+  UPLOAD_TARGET="$BRANCH"
+fi
+
 # Set command
 if [[ -z "${COMMAND}" ]]; then
   echo "Error: Build command missing."
@@ -170,7 +209,7 @@ fi
 
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
-  RELEASE=$(cat "${SITEDIR}/release")
+  RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
 fi
 
 # Normalize the branch name
@@ -181,15 +220,24 @@ BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 COMMIT="$(git describe --always --dirty)"
 
 # Number of days that may pass between releasing an updating
-PRIORITY=1
+if [[ -z ${PRIORITY+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      PRIORITY=0
+      ;;
+    *)
+      PRIORITY=1
+      ;;
+  esac
+fi
 
 update() {
   echo "--- Update Gluon Dependencies"
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
-       GLUON_BRANCH="${BRANCH}" \
+       GLUON_RELEASE="${RELEASE}" \
+       GLUON_BRANCH="${AU_BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        update
 }
@@ -200,8 +248,8 @@ clean() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_RELEASE="${RELEASE}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          clean
@@ -214,8 +262,8 @@ download() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_RELEASE="${RELEASE}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          download
@@ -225,15 +273,13 @@ download() {
 build() {
   for TARGET in ${TARGETS}; do
     echo "--- Build Gluon Images for target: ${TARGET}"
-    case "${BRANCH}" in
-      stable| \
-      testing| \
-      development)
+    case "${AU_BRANCH}" in
+      stable)
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_RELEASE="${RELEASE}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
              GLUON_TARGET="${TARGET}"
         ;;
@@ -242,8 +288,8 @@ build() {
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_RELEASE="${RELEASE}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_TARGET="${TARGET}"
       ;;
     esac
@@ -253,10 +299,13 @@ build() {
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
+       GLUON_RELEASE="${RELEASE}" \
        GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
+
+  cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
+     "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
 
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
@@ -280,6 +329,7 @@ sign() {
 }
 
 upload() {
+  set -x
   echo "--- Upload Gluon Firmware Images and Manifest"
 
   # Build the ssh command to use
@@ -287,7 +337,7 @@ upload() {
   SSH="${SSH} -o stricthostkeychecking=no -v"
 
   # Determine upload target prefix
-  TARGET="${BRANCH}"
+  TARGET="${UPLOAD_TARGET}"
 
   # Create the target directory on server
   ${SSH} \
@@ -296,33 +346,48 @@ upload() {
       mkdir \
           --parents \
           --verbose \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
 
+  # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
+  echo "Compressing images..."
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade other
+
   # Copy images to server
+  echo "Uploading images..."
   rsync \
       --verbose \
-      --recursive \
-      --compress \
       --progress \
-      --links \
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
-      "${SITEDIR}/output/images/" \
-      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
+      "${SITEDIR}/output/images.txz" \
+      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
+
+  echo "Uncompressing images..."
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+     tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/"
+
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/sysupgrade" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+      ln -sf \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/other" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
@@ -330,7 +395,7 @@ prepare() {
   echo "--- Prepare directory for upload"
 
   # Determine upload target prefix
-  TARGET="${BRANCH}"
+  TARGET="${UPLOAD_TARGET}"
 
   # Create the target directory on server
   mkdir \
@@ -342,7 +407,7 @@ prepare() {
   mv \
     --verbose \
     "${SITEDIR}/output/images" \
-    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}-${BUILD}"
+    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}"
 
   # Link latest upload in target to 'current'
   cd "${SITEDIR}/output"
@@ -350,7 +415,7 @@ prepare() {
       --symbolic \
       --force \
       --no-target-directory \
-      "${RELEASE}-${BUILD}" \
+      "${RELEASE}" \
       "firmware/${TARGET}/current"
 }
 

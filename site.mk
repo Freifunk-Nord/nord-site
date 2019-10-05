@@ -24,7 +24,7 @@ GLUON_WLAN_MESH ?= 11s
 GLUON_LANGS ?= en de
 GLUON_DEPRECATED ?= 0
 
-# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.2.x/package/features
 GLUON_FEATURES := \
 	config-mode-geo-location-osm \
 	web-private-wifi \
@@ -51,6 +51,7 @@ GLUON_SITE_PACKAGES := \
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
+#	ddhcpd
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
 GLUON_SITE_PACKAGES += \
@@ -159,8 +160,14 @@ USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
-# add addition network drivers and usb stuff only to targes where disk space does not matter
-ifeq ($(GLUON_TARGET),x86-generic)
+# extra packages for fat clients
+FAT_PACKAGES := \
+	tcpdump \
+	gre \
+	wireguard
+
+# add addition network drivers and usb stuff only to targets where disk space does not matter
+ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
@@ -169,7 +176,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
 		$(USB_PACKAGES_GPS) \
-		$(USB_X86_GENERIC_NETWORK_MODULES)
+		$(USB_X86_GENERIC_NETWORK_MODULES) \
+		$(FAT_PACKAGES)
 endif
 
 # use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163
