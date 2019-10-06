@@ -2,7 +2,7 @@
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2018.2
+DEFAULT_GLUON_RELEASE := 2018.2.3
 #DEFAULT_GLUON_RELEASE := 2018.2.1~exp$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
