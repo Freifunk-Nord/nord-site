@@ -164,6 +164,11 @@ FAT_PACKAGES := \
 	gre \
 	wireguard
 
+#zram for tiny devices
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+GLUON_SITE_PACKAGES += zram-swap
+endif
+
 # add addition network drivers and usb stuff only to targets where disk space does not matter
 ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
 	# support the USB stack on x86 devices
