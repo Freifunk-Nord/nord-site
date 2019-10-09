@@ -208,6 +208,10 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_gl-ar300m_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
 
+ifeq ($(GLUON_TARGET),ramips-mt76x8)
+	GLUON_netgear-r6120_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
+
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
