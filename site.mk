@@ -9,7 +9,7 @@ DEFAULT_GLUON_RELEASE := 2019.1~exp$(shell date '+%y%m%d')
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_DEPRECATED ?=  full
+GLUON_DEPRECATED ?= upgrade
 GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
@@ -166,7 +166,7 @@ FAT_PACKAGES := \
 
 #zram for tiny devices
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
-GLUON_SITE_PACKAGES += zram-swap
+	GLUON_SITE_PACKAGES += zram-swap
 endif
 
 # add addition network drivers and usb stuff only to targets where disk space does not matter

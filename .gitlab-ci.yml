@@ -6,6 +6,7 @@ variables:
   GLUON_BRANCH: v2019.1.x
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
+  DEPRECATED: 'upgrade'
   # set to '', 'V=s' or 'V=s BUILD_LOG=1'
   VERBOSE: ''
 
