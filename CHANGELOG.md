@@ -1,4 +1,116 @@
-TODO: Changelog bis 2017.1.7
+Änderungen mit Firmwareversion 2016.2.7.2 basierend auf Gluon 2016.2.x 
+======================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* Das Transfer-Paket und der Autoupdate-Cleaner wurden entfernt
+* Es wird jetzt ein default Bandbreitenlimit gesetzt, wenn man das Feature im Config Mode aktiviert
+
+Generelle Änderungen an Gluon 2016.2.x
+--------------------------------------
+* Allow upgrades to current CPE210/510 images based on upcoming Gluon master (Commit 35c9f9ae)
+
+
+Änderungen mit Firmwareversion 2016.2.7.1 basierend auf Gluon 2016.2.7 
+======================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* Das Knotenformular wurde abgeschaltet. Alle Verweise wurden aus der Firmware entfernt. Die Koordinaten und Kontaktionformationen
+  werden wieder im Knoten gespeichert und können auch nur noch dort geändert werden.
+* Bestehende Koordinaten und Kontaktinformationen werden mit einem Transfer-Paket vom Server geladen und im Knoten gespeichert.
+  Dabei werden keine Kontaktinformationen veröffentlicht. Wer dies möchte kann seine Email Adresse, Telefonnummer
+  oder Chatnamen im Config Mode seines Knoten eintragen, diese wird dann in der Knotenkarte angezeigt.
+* Der Autoupdate-Cleaner bereinigt die `autoupdate.cfg` im Knoten und entfernt dabei ggf. vorhandene Altlasten.
+
+
+Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.7 
+====================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* gluon-quickfix überarbeitet
+* Der Hardware Wifi-Taster ist beim TL-WR741 - 841 - 842N/ND und beim TL-WR1043 per default inaktiv. 
+  Die Funktionalität kann im Config Mode eingestellt werden.
+* Der ssidchanger checkt jetzt eimal alle 60 Minuten
+
+Generelle Änderungen an Gluon 2016.2.7
+--------------------------------------
+* Verbesserter Umgang mit Fehlern beim sysupgrade (#1160)
+* Backport um das kompilieren von Gluon mit Perl 5.26 oder neuer zu ermöglichen (76753ed)
+
+Probleme mit Gluon 2016.2.7
+--------------------------------------
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+
+Generelle Änderungen an Gluon 2016.2.6
+--------------------------------------
+* Sicherheitsfix CVE-2016-10229 (#1097)
+* Ein Fehler beim Roamen von Clients wurde behoben (#1121)
+* Ein Fehler beim kombilieren von Gluon mit OpenSSL 1.1 wurde behoben (b6a22ce)
+* Ein Fehler beim kombilieren von Gluon mit langen Dateinamen wurde behoben (#1120)
+* Die sysupgrade Routine wurde komplett überarbeitet (d4a69c0)
+
+Mehr Routermodelle werden unterstützt
+-------------------------------------
+
+    ar71xx-generic
+        TP-Link:    TL-WR841N/ND v12,
+
+Probleme mit Gluon 2016.2.6
+--------------------------------------
+ * Wenn Mesh on WAN deaktiviert wurde, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen        mit vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.6.html
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.7.html
+
+
+Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.x 
+================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* Update auf B.A.T.M.A.N. compat 15.
+* Wechsel auf das MESH-Protokoll 802.11s. Neue MESH-SSID ffnord-mesh
+* Nextnode Problem wurde gelößt. Neue Nextnode Adresse: 10.187.127.254.
+* Neuausrichtung der netzinternen IP Vergabe. DHCP Ranges der Gateways verkleinert.
+* Gateway Slots auf 20 erhöt.
+* Wegfall alternativer Autoupdater Branches. Alle Nodes werden nun unter stable geführt. Das erleichtert das updaten der Knoten.
+* opkg Repository liegt nun auf Gateway 0.
+* Gateway VPN Keys erneuert.
+* Autoupdate Server reduziert. Nun ist auch auch Public Server gelistet der von Knoten mit Uplink direkt und schneller genutzt werden   
+  kann.
+* rubo77 Autoupdater Signatur erneuert.
+* bigfoots Autoupdater Signatur entfernt.
+* Gateway Adressen geändert. Wechsel von vpnxx. auf xx.gw.
+* quickfix Update auf #62e79b0 verhindert nach einem Reboot 60 Minuten einen erneuten Neustart.
+* Nur Knoten die über das Knotenformular angemeldet sind können sich über VPN einwählen.
+* Fehlerhaften publik IPv6 Präfix (2a03:2267:4e6f:7264) durch korekte ULA (fd42:eb49:c0b5:4242) ersetzt. 
+ 
+Generelle Änderungen an Gluon 2016.2.5
+--------------------------------------
+* Es wurde ein Problem behoben das unter B.A.T.M.A.N. compat 15 zu Kernel Abstürzen führte. (d452a7c)
+
+Probleme mit Gluon 2016.2.5
+--------------------------------------
+ * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst. (#1010)
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit 
+   vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
+ 
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.5.html
+
 
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
 ================================================================
@@ -12,15 +124,17 @@ Generelle Änderungen an Gluon 2016.2.4
  * Ein Problem mit batman-adv (compat 15) wurde behoben. Dieses führte dazu, dass Pakete einer bestimmten Größe nicht übertragen werden konnen (b7eeef9).
  Die Gluon Entwickler gehen davon aus, dass dies der Grund für hängende Autoupdateprozesse war.
  * Ein Problem beim kompilieren der Gluon Firmware wurde behoben (#1059).
- * Es wurde ein Fehler im Ladescript von respondd behoben, der zum einem Speicherüberlauf führte (9a0aeb9).
+ * Es wurde ein Fehler im Ladescript von respondd behoben, der zum einem Speicherüberlauf führte. (9a0aeb9)
  * Die sysupgrade Files für x86 Systeme wurden repariert (41fd50d, ad37e2b).
  * Der Manifestgenerator erstellt nun Hashwerte mit dem SHA256 Algorithmus.
 
 Probleme mit Gluon 2016.2.4
 --------------------------------------
- * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst.
- * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen.
- * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren.
+ * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst. (#1010)
+ * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit 
+   vorgeschalteten MAC Filterregeln zu Problemen führen. (#496)
+ * Die TX Leistung der misten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung 
+   per Hand zu reduzieren. (#496)
  
  Offizielle Changelogs zum nachlesen:
 ------------------------------------
@@ -327,9 +441,4 @@ Die x86 64Bit Architektur wird jetzt unterstützt. Dieses Image kann ebenfalls f
 Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
-* https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
-* https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
-* https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
-* https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
-* https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
-* https://gluon.readthedocs.org/en/v2016.1.5/releases/v2016.1.5.html
+* https://gluon.readthedocs.io/en/latest/package/gluon-web-logging.html
