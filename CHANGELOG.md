@@ -1,3 +1,24 @@
+Änderungen mit Firmwareversion 2018.2.3 basierend auf Gluon 2018.2.3
+====================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* In den x86-generic und x86-64 Targets sind mehr Pakete vorinstalliert: tcpdump, gre und wireguard
+* Im Config Mode kann man die Koordinaten per Karte auswählen
+* Wenn man den Wifi-Taster auf WiFi-Reset konfiguriert, wird jetzt auch das Gateway neu selected
+* DSGVO konformer Text im Config Mode
+* gluon-alt-esc Package entfernt (nicht mehr kompatibel)
+
+
+Änderungen mit Firmwareversion 2017.1.8 basierend auf Gluon 2017.1.8 
+======================================================================
+
+Freifunk Nord spezifische Änderungen:
+-------------------------------------
+* add gluon-alt-esc Package Mit dem man direkt rausleiten kann
+* verbesserter Quickfix, falls der Router abstürzt
+
+
 Änderungen mit Firmwareversion 2016.2.7.2 basierend auf Gluon 2016.2.x 
 ======================================================================
 
@@ -32,7 +53,7 @@ Freifunk Nord spezifische Änderungen:
 * gluon-quickfix überarbeitet
 * Der Hardware Wifi-Taster ist beim TL-WR741 - 841 - 842N/ND und beim TL-WR1043 per default inaktiv. 
   Die Funktionalität kann im Config Mode eingestellt werden.
-* Der ssidchanger checkt jetzt eimal alle 60 Minuten
+* Der ssid-changer checkt jetzt einmal alle 60 Minuten
 
 Generelle Änderungen an Gluon 2016.2.7
 --------------------------------------
