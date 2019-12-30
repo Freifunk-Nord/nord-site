@@ -30,13 +30,15 @@ for c in $CONFIGS; do
     echo "OK: $c"
   fi
 done
-#GLUON_SITEDIR="./" GLUON_SITE_CONFIG="" lua5.1 tests/site_config.lua
 
-echo "####### validating $P/make-release.sh ..."
-bash -n "$P/make-release.sh"
-if [ "$?" == 0 ]; then
-  echo "OK: $P/make-release.sh"
-fi
+for BASHFILE in "$P"/*.sh; do
+    [ -f "$BASHFILE" ] || continue
+  echo "####### validating $BASHFILE ..."
+  bash -n "$BASHFILE"
+  if [ "$?" == 0 ]; then
+    echo "OK: $BASHFILE"
+  fi
+done
 
 echo "####### validating $P/modules ..."
 GLUON_SITE_FEEDS="none"
@@ -45,34 +47,36 @@ testpath=/tmp/site-validate
 rm -Rf "$testpath"
 mkdir -p "$testpath/packages"
 cd "$testpath/packages"
-for feed in $GLUON_SITE_FEEDS; do
-  echo "####### checking PACKAGES_${feed^^}_REPO ..."
-  repo_var="PACKAGES_${feed^^}_REPO"
-  commit_var="PACKAGES_${feed^^}_COMMIT"
-  branch_var="PACKAGES_${feed^^}_BRANCH"
-  repo="${!repo_var}"
-  commit="${!commit_var}"
-  branch="${!branch_var}"
-  if [ "$repo" == "" ]; then
-    echo "repo $repo_var missing"
-    exit 1
-  fi
-  if [ "$commit" == "" ]; then
-    echo "commit $commit_var missing"
-    exit 1
-  fi
-	if [ "$branch" == "" ]; then
-    echo "branch $branch_var missing"
-    exit 1
-  fi
-  git clone -b "$branch" --depth 1000 --single-branch "$repo" "$feed"
-  if [ "$?" != "0" ]; then exit 1; fi
-  cd "$feed"
-  echo "git checkout $commit"
-  git checkout "$commit"
-  if [ "$?" != "0" ]; then exit 1; fi
-  cd -
-done
+if [ "$GLUON_SITE_FEEDS" != "none" ]; then
+  for feed in $GLUON_SITE_FEEDS; do
+    echo "####### checking PACKAGES_${feed^^}_REPO ..."
+    repo_var="PACKAGES_${feed^^}_REPO"
+    commit_var="PACKAGES_${feed^^}_COMMIT"
+    branch_var="PACKAGES_${feed^^}_BRANCH"
+    repo="${!repo_var}"
+    commit="${!commit_var}"
+    branch="${!branch_var}"
+    if [ "$repo" == "" ]; then
+      echo "repo $repo_var missing"
+      exit 1
+    fi
+    if [ "$commit" == "" ]; then
+      echo "commit $commit_var missing"
+      exit 1
+    fi
+  	if [ "$branch" == "" ]; then
+      echo "branch $branch_var missing"
+      exit 1
+    fi
+    git clone -b "$branch" --depth 1000 --single-branch "$repo" "$feed"
+    if [ "$?" != "0" ]; then exit 1; fi
+    cd "$feed"
+    echo "git checkout $commit"
+    git checkout "$commit"
+    if [ "$?" != "0" ]; then exit 1; fi
+    cd -
+  done
+fi
 
 echo "####### Lua linter check for all package feeds ..."
 ~/.luarocks/bin/luacheck --config "$P/tests/.luacheckrc" "$testpath/packages"
