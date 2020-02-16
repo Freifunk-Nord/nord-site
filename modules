@@ -6,12 +6,12 @@ GLUON_SITE_FEEDS='ffki sargon eulenfunk ssidchanger button'
 
 # usb support and gluon-config-mode-ppa
 PACKAGES_FFKI_REPO=https://github.com/freifunk-kiel/ffki-packages
-PACKAGES_FFKI_COMMIT=96d5786aa3bc5676274f08b92a884faccee38dd7
+PACKAGES_FFKI_COMMIT=a3d524aa862b2cab6fc2be1d9c174e7422ac4331
 PACKAGES_FFKI_BRANCH=2018.1.x
 
 # ddhcpd and roamguide
 PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon.git
-PACKAGES_SARGON_COMMIT=7bb9966c837b5ff4652e970aef06cb705ee9d428
+PACKAGES_SARGON_COMMIT=a3fad6a7eec113136ad9cf954e7d61408e8b77bb
 PACKAGES_SARGON_BRANCH=master
 
 # gluon-quickfix
@@ -21,7 +21,7 @@ PACKAGES_EULENFUNK_BRANCH=lede
 
 # gluon-ssid-changer
 PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
-PACKAGES_SSIDCHANGER_COMMIT=7b5b7cab11d186696b4d2319f74145b0aaeb0c3c
+PACKAGES_SSIDCHANGER_COMMIT=f6db033d6568ea27805c9694b20085b8dec5ba87
 PACKAGES_SSIDCHANGER_BRANCH=2018.1.x
 
 # ffffm-button-bind
