@@ -3,7 +3,7 @@ variables:
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/freifunk-gluon/gluon.git
-  GLUON_BRANCH: v2019.1.x
+  GLUON_BRANCH: v2020.1.x
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
   DEPRECATED: 'upgrade'
