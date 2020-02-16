@@ -166,28 +166,29 @@ if [[ -z ${TARGETS+x} ]] ; then
   case "${BRANCH}" in
     stable)
       TARGETS="ar71xx-tiny ar71xx-generic"
+      TARGETS+=" ath79-generic" # (TP-Link Archer C6 v2, devolo WiFi pro 1200i)
       TARGETS+=" x86-64 x86-generic" # (VMs)
-      TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
+      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750, TP-Link Archer C2 (v1), C20 (v1), C20i, C50 (v1))
       #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
 
       # BROKEN:
       #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710" # (raspberry Pi 1, 2 und 3)
-      TARGETS+=" ipq40xx" # (FitzBox 4040)
-      #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
-      TARGETS+=" x86-geode"
-      TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
-      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13, Netgear R6120 und archer c50)
+      TARGETS+=" ipq40xx-generic" # (FitzBox 4040)
+      TARGETS+=" lantiq-xrx200" # (FitzBox 7360 (v1, v2), 7360 SL, 7362 SL, 7412)
+      TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526, Netgear EX6150 (v1), Netgear R6220)
+      #TARGETS+=" x86-geode"
+      #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
+      #TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13, Netgear R6120 und archer c50)
       #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-      #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      #TARGETS+=" ipq806x-generic" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
       #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
       ;;
     *)
       # Default to all targets
-      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 ipq40xx"
-      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-generic x86-geode x86-64"
     ;;
   esac
 fi
