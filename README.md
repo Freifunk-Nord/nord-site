@@ -7,7 +7,7 @@ https://gluon.readthedocs.org/en/latest/
 
 Gluon Version auf der die Freifunk Nord Firmware basiert:
 
-* 2020.1 - Gluon v2020.1.x
+* 2020.1.2 - Gluon v2020.1.x
 
 # Download der Firmware
 
