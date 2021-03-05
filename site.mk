@@ -3,7 +3,7 @@
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2020.2.1
-DEFAULT_GLUON_RELEASE := 2020.1.2~exp$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2020.1.4~exp$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -170,7 +170,7 @@ ifeq ($(GLUON_TARGET),ar71xx-tiny)
 endif
 
 # add addition network drivers and usb stuff only to targets where disk space does not matter
-ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
+ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64))
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
