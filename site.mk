@@ -43,8 +43,7 @@ GLUON_FEATURES := \
 GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
 	iwinfo \
-	iptables \
-	haveged
+	iptables
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
