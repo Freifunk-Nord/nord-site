@@ -28,17 +28,36 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
 
   1.3 Freifunk Nord Site clonen
 
+    1.3.1 stable
+
        cd gluon
        git clone -b nord-lede https://github.com/ffnord/nord-site.git site
-
+       
+    1.3.2 experimental
+    
+       cd gluon
+       git clone -b nord-2020.2.x https://github.com/ffnord/nord-site.git site
+       
 2. Firmware bauen
 
   2.1 Build vorbereiten
 
+    2.1.1 stable
+
+       GLUON_DEPRECATED=1 make update
+       
+    2.1.2 experimental
+    
        make update
 
   2.2 Build durchführen
 
+    2.2.1 stable
+
+       GLUON_DEPRECATED=1 make -j8 GLUON_TARGET=ar71xx-generic ##-j $ZAHL$ = Anzahl der CPU Kerne
+       
+    2.2.2 experimental
+    
        make -j8 GLUON_TARGET=ar71xx-generic ##-j $ZAHL$ = Anzahl der CPU Kerne
 
        ## Mögliche Targets
