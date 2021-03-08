@@ -19,7 +19,7 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
 
   1.1 Abhängigkeiten installieren
 
-       sudo apt-get install git subversion build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-de time
+       sudo apt-get install git subversion build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev time
 
   1.2 Gluon repo clonen
 
