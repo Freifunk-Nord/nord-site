@@ -1,88 +1,240 @@
+image: debian:buster
+default:
+  interruptible: true
+before_script:
+- apt-get update > /dev/null
+- apt-get install -y curl git libncurses-dev build-essential make gawk unzip wget
+  python2.7 file tar bzip2 tree ccache ecdsautils > /dev/null
+- mkdir -p ccache
+- PATH="/usr/lib/ccache:$PATH"
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  GIT_SSL_CAPATH: /etc/ssl/certs/
-  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
-  GLUON_GIT: https://github.com/freifunk-gluon/gluon.git
-  GLUON_BRANCH: v2020.2.x
-  AU_BRANCH: stable
-  # set to '' or 'BROKEN=1'
-  BROKEN: 'BROKEN=1'
-  DEPRECATED: 'upgrade'
-  # set to '', 'V=s' or 'V=s BUILD_LOG=1'
-  VERBOSE: ''
-
-cache:
-  key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-  paths:
-    - gluon
-
+  FORCE_UNSAFE_CONFIGURE: '1'
+  CCACHE_DIR: $CI_PROJECT_DIR/ccache
+  CCACHE_MAXSIZE: 20G
 stages:
-  - prepare
-  - build
-  - upload
-
-# Preparation
-
-prepare:
-  stage: prepare
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $CONTAINER_IMAGE:latest || true
-    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_COMMIT_SHA -t $CONTAINER_IMAGE:latest .gitlab-ci/build-container
-    - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
-    - docker push $CONTAINER_IMAGE:latest
-  cache: {}
-
-# Actual building
-build:
+- pre-build-tests
+- build
+- post build
+- test
+- prepare-deploy
+- test-deploy
+- deploy
+build-all:
   stage: build
-  image: $CI_REGISTRY_IMAGE/build
-  script:
-    - export FORCE_UNSAFE_CONFIGURE=1
-      # set make options to max number of cores or -j1 if verbose is set
-    - if [ -n "$VERBOSE" ]; then MAKEOPTS="-j 1 $VERBOSE"; else MAKEOPTS="-j $(nproc --all)"; fi
-    - MAKEOPTS="$MAKEOPTS $BROKEN GLUON_DEPRECATED=$DEPRECATED"
-    - 'echo Build options: "$MAKEOPTS"'
-      # former clone step
-    - set -x
-    - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
-    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
-      # We should never need this, should we?
-    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
-      # Apply patches
-    - ./.gitlab-ci/patch.sh patches gluon
-      # Build
-    - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
-      # Revert patches
-    - ./.gitlab-ci/patch.sh -r patches gluon
-      # Bring gluon repo to cacheable state
-    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
-      # Sign (not in Nord)
-    #- echo $SIGNING_KEY > signing_key
-    #- ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -s $(pwd)/signing_key
-  artifacts:
-    untracked: false
+  needs: []
+  tags:
+  - fast
+  image: registry.chaotikum.net/freifunk-luebeck/gluon-build:latest
+  cache:
     paths:
-      - debug.*
-      - output
-      - gluon/openwrt/logs/*
-    expire_in: 3 days
-    when: always
-  dependencies: []
-
-upload:
-  stage: upload
-  image: $CI_REGISTRY_IMAGE/build
+    - ccache
+    key: ${TARGET}
+  parallel:
+    matrix:
+    - TARGET:
+      - ar71xx-generic
+      - ar71xx-tiny
+      - ar71xx-nand
+      - ath79-generic
+      - brcm2708-bcm2708
+      - brcm2708-bcm2709
+      - ipq40xx-generic
+      - ipq806x-generic
+      - lantiq-xrx200
+      - lantiq-xway
+      - mpc85xx-generic
+      - mpc85xx-p1020
+      - ramips-mt7620
+      - ramips-mt7621
+      - ramips-mt76x8
+      - ramips-rt305x
+      - sunxi-cortexa7
+      - x86-generic
+      - x86-geode
+      - x86-legacy
+      - x86-64
+  variables:
+    GLUON_SITEDIR: ..
+    GLUON_DEPRECATED: 1
+    GLUON_AUTOUPDATER_ENABLED: 1
+    GLUON_AUTOUPDATER_BRANCH: stable
+    GLUON_BRANCH: $GLUON_AUTOUPDATER_BRANCH
+    CCACHE_DIR: $CI_PROJECT_DIR/ccache
+    CCACHE_MAXSIZE: 20G
+    FORCE_UNSAFE_CONFIGURE: '1'
   script:
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_KEY")
-      # create fake gluon dir to satisfy build script
-    - mkdir -p gluon
-    - ./.gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID
-  dependencies:
-    - build
-  cache: {}
+  - file $(which gcc)
+  - tree -L 3
+  - env | grep CI
+  - make -C gluon update
+  - 'make -C gluon -j $((($(nproc)+1) / 2)) GLUON_TARGET=$TARGET '
+  - ccache -s
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+test:images:
+  stage: test
+  needs:
+  - build-all
+  allow_failure: true
+  before_script:
+  - apt update
+  - apt install -qq -y tree
+  script:
+  - ls gluon/output/images/sysupgrade/ | grep wdr3600
+  - ls gluon/output/images/sysupgrade/ | grep wr841
+  - ls gluon/output/images/sysupgrade/ | grep ubiquiti-unifi
+  - ls gluon/output/images/sysupgrade/ | grep nanostation-m2
+  - ls gluon/output/images/sysupgrade/ | grep wr1043n
+  - ls gluon/output/images/sysupgrade/ | grep wdr4300
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+test:image-count:
+  stage: test
+  needs:
+  - build-all
+  allow_failure: true
+  before_script:
+  - apt update
+  - apt install -qq -y tree
+  script:
+  - N=$(ls gluon/output/images/sysupgrade/ | wc -l)
+  - echo $N
+  - '[ $N -ge 260 ]'
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+test:image-names:
+  stage: test
+  needs:
+  - build-all
+  allow_failure: false
+  before_script:
+  - apt update
+  - apt install -qq -y tree
+  script:
+  - scripts/ci/test_image_names.sh gluon/output/images/sysupgrade
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+generate manifest:
+  stage: post build
+  needs:
+  - build-all
+  tags:
+  - fast
+  image: registry.chaotikum.net/freifunk-luebeck/gluon-build:latest
+  cache:
+    paths:
+    - ccache
+    key: manifest
+  variables:
+    FORCE_UNSAFE_CONFIGURE: '1'
+  script:
+  - make -C gluon GLUON_SITEDIR=.. update
+  - make -C gluon GLUON_SITEDIR=.. GLUON_PRIORITY=7 GLUON_AUTOUPDATER_BRANCH=stable
+    GLUON_BRANCH=stable manifest
+  - make -C gluon GLUON_SITEDIR=.. GLUON_PRIORITY=0 GLUON_AUTOUPDATER_BRANCH=beta
+    GLUON_BRANCH=beta manifest
+  - make -C gluon GLUON_SITEDIR=.. GLUON_PRIORITY=0 GLUON_AUTOUPDATER_BRANCH=experimental
+    GLUON_BRANCH=experimental manifest
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+sign manifest:
+  stage: prepare-deploy
+  needs:
+  - build-all
+  - generate manifest
+  tags:
+  - fast
+  image: registry.chaotikum.net/freifunk-luebeck/gluon-build:latest
+  rules:
+  - if: $SIGNING_KEY
+  cache:
+    paths:
+    - ccache
+    key: manifest
+  script:
+  - echo $SIGNING_KEY > ecdsa.key
+  - ./gluon/contrib/sign.sh ecdsa.key gluon/output/images/sysupgrade/experimental.manifest
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - gluon/output
+test:manifest-length:
+  stage: test-deploy
+  needs:
+  - generate manifest
+  before_script: []
+  script:
+  - bash scripts/ci/test_manifest_length.sh
+  artifacts:
+    when: always
+    paths:
+    - gluon/output
+test:manifest-signature:
+  stage: test-deploy
+  needs:
+  - sign manifest
+  rules:
+  - if: $SIGNING_KEY
+  image: registry.chaotikum.net/freifunk-luebeck/gluon-build:latest
+  before_script: []
+  script:
+  - PUBKEY=$(echo $SIGNING_KEY | ecdsakeygen -p)
+  - ./gluon/contrib/sigtest.sh $PUBKEY gluon/output/images/sysupgrade/experimental.manifest
+  artifacts:
+    when: always
+    paths:
+    - gluon/output
+upload:
+  stage: deploy
+  rules:
+  - if: $DEPLOY_USER && $DEPLOY_HOST
+  before_script:
+  - apt-get -qq update
+  - apt-get -qq install -y git make gawk wget python2.7 file tar bzip2 rsync tree
+  - mkdir -p ~/.ssh
+  - echo -e "StrictHostKeyChecking no" > ~/.ssh/config
+  - eval $(ssh-agent -s)
+  - echo "$DEPLOY_KEY" | ssh-add -
+  script:
+  - tree -L 3 gluon/output
+  - TAG=$([[ $CI_COMMIT_TAG ]] && echo $CI_COMMIT_TAG || echo $CI_COMMIT_BRANCH)_$(date
+    +%F_%H-%M-%S)
+  - mkdir -p "public/$TAG"
+  - cd gluon
+  - mv output $TAG
+  - ln -s ./$TAG ./latest
+  - rsync -rvhl ./$TAG ${DEPLOY_USER}@${DEPLOY_HOST}:data/
+  - rsync -rvhl ./latest ${DEPLOY_USER}@${DEPLOY_HOST}:data/
+pages:
+  stage: deploy
+  rules:
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  script:
+  - TAG=${CI_COMMIT_REF_SLUG}_$(date +%F_%H-%M-%S)
+  - mkdir -p public
+  - mv gluon/output/* public
+  - find public/ -type d -exec sh -c 'tree -I "index.html" -H "." -T "$TAG" -s -h
+    --si -L 2 "{}" > "{}/index.html" ' \;
+  artifacts:
+    when: always
+    expire_in: 3 day
+    paths:
+    - public
+
