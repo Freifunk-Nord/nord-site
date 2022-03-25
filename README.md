@@ -32,12 +32,12 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
 
        cd gluon
        git clone -b nord-lede https://github.com/ffnord/nord-site.git site
-       
+
     1.3.2 experimental
-    
+
        cd gluon
        git clone -b nord-2020.2.x https://github.com/ffnord/nord-site.git site
-       
+
 2. Firmware bauen
 
   2.1 Build vorbereiten
@@ -45,9 +45,9 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
     2.1.1 stable
 
        GLUON_DEPRECATED=1 make update
-       
+
     2.1.2 experimental
-    
+
        make update
 
   2.2 Build durchführen
@@ -55,9 +55,9 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
     2.2.1 stable
 
        GLUON_DEPRECATED=1 make -j8 GLUON_TARGET=ar71xx-generic ##-j $ZAHL$ = Anzahl der CPU Kerne
-       
+
     2.2.2 experimental
-    
+
        make -j8 GLUON_TARGET=ar71xx-generic ##-j $ZAHL$ = Anzahl der CPU Kerne
 
        ## Mögliche Targets
@@ -70,9 +70,9 @@ Gluon Version auf der die Freifunk Nord Firmware basiert:
         - x86-64
         - x86-generic
         - x86-geode
-       
+
        ## Nur mit 802.11s
-       
+
         - brcm2708-bcm2708
         - brcm2708-bcm2709
         - ipq806x
@@ -104,9 +104,17 @@ You can validate your changes to this repository by calling the validate_site.sh
 
     tests/validate_site.sh
 
-You can debug lua scripts in modules with 
+You can debug lua scripts in modules with
 
     apt install luarocks
     luarocks install --local luacheck
     tests/validate_site.sh
     ~/.luarocks/bin/luacheck --config "tests/.luacheckrc" /tmp/site-validate/|grep "(E"
+
+
+## CI config
+
+You can upload upload all artifacts to a server via ssh by setting the following environment variables:
+- `DEPLOY_USER`: ssh user
+- `DEPLOY_HOST`: ssh server (without trailing `:`)
+- `DEPLOY_KEY`: a private ssh key
