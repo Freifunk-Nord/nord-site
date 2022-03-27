@@ -21,7 +21,7 @@ SITEDIR="$(pwd)"
 BUILD="snapshot"
 
 # Specify deployment server and user
-DEPLOYMENT_SERVER="10.116.250.1"
+DEPLOYMENT_SERVER="116.202.216.125"
 DEPLOYMENT_USER="rsync"
 DEPLOYMENT_PATH="/opt/firmware/nord"
 
