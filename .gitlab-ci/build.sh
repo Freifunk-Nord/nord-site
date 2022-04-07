@@ -382,7 +382,7 @@ upload() {
       --verbose \
       --progress \
       --chmod=ugo=rwX \
-      --rsh="${SSH}" \
+      --rsh="${SSH} -p 22555" \
       "${SITEDIR}/output/images.txz" \
       "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
