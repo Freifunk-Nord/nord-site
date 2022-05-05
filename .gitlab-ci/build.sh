@@ -22,6 +22,7 @@ BUILD="snapshot"
 
 # Specify deployment server and user
 DEPLOYMENT_SERVER="116.202.216.125"
+DEPLOYMENT_SSH_ARGS=" -p 22555 " # Default 22
 DEPLOYMENT_USER="rsync"
 DEPLOYMENT_PATH="/opt/firmware/nord"
 
@@ -363,6 +364,7 @@ upload() {
   # Create the target directory on server
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      ${DEPLOYMENT_SSH_ARGS} \
       -- \
       mkdir \
           --parents \
@@ -382,30 +384,34 @@ upload() {
       --verbose \
       --progress \
       --chmod=ugo=rwX \
-      --rsh="${SSH} -p 22555" \
+      --rsh="${SSH} ${DEPLOYMENT_SSH_ARGS}" \
       "${SITEDIR}/output/images.txz" \
       "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
   echo "Uncompressing images..."
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      ${DEPLOYMENT_SSH_ARGS} \
       -- \
      tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/"
 
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      ${DEPLOYMENT_SSH_ARGS} \
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/sysupgrade" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      ${DEPLOYMENT_SSH_ARGS} \
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      ${DEPLOYMENT_SSH_ARGS} \
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/other" \
