@@ -164,41 +164,31 @@ fi
 
 # Default to build branch specific targets if parameter -t is not set 
 if [[ -z ${TARGETS+x} ]] ; then
+  # Base targets we build
+  TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand x86-64"
   case "${BRANCH}" in
-    "nord-2020.2.x")
-      # all targets
-      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7"
-      TARGETS+=" x86-generic x86-geode x86-64" # (VMs)
-      TARGETS+=" ar71xx-mikrotik brcm2708-bcm2710 mvebu-cortexa9" # BROKEN targets
-      ;;
-    "master")
-      TARGETS="ar71xx-tiny ar71xx-generic"
-      TARGETS+=" ath79-generic" # (TP-Link Archer C6 v2, devolo WiFi pro 1200i)
-      TARGETS+=" x86-64 x86-generic" # (VMs)
-      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
-      #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-      #TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750, TP-Link Archer C2 (v1), C20 (v1), C20i, C50 (v1))
-      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
-
-      #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710" # (raspberry Pi 1, 2)
-      TARGETS+=" ipq40xx-generic" # (FitzBox 4040)
-      TARGETS+=" lantiq-xrx200" # (FitzBox 7360 (v1, v2), 7360 SL, 7362 SL, 7412)
-      TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526, Netgear EX6150 (v1), Netgear R6220)
-      #TARGETS+=" ramips-mt76x8" # unstable WiFi (tp-link 841 v13, Netgear R6120 und archer c50)
-      #TARGETS+=" x86-geode"
-      #TARGETS+=" ramips-rt305x" # (fonera, vocore a5)
-      #TARGETS+=" ipq806x-generic" # unstable wifi drivers (tp-link-archer-c2600)
-      
-      # BROKEN:
-      #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
-      #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-      #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
-      ;;
     *)
       # all targets
-      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7"
-      TARGETS+=" x86-generic x86-geode x86-64" # (VMs)
-      TARGETS+=" ar71xx-mikrotik brcm2708-bcm2710 mvebu-cortexa9" # BROKEN targets
+      TARGETS+=" ath79-generic"
+      TARGETS+=" brcm2708-bcm2708"
+      TARGETS+=" brcm2708-bcm2709"
+      TARGETS+=" ipq40xx-generic"
+      TARGETS+=" ipq806x-generic"
+      TARGETS+=" lantiq-xrx200"
+      TARGETS+=" lantiq-xway"
+      TARGETS+=" mpc85xx-generic"
+      TARGETS+=" mpc85xx-p1020"
+      TARGETS+=" ramips-mt7620"
+      TARGETS+=" ramips-mt7621"
+      TARGETS+=" ramips-mt76x8"
+      TARGETS+=" ramips-rt305x"
+      TARGETS+=" sunxi-cortexa7"
+      TARGETS+=" x86-generic"
+      TARGETS+=" x86-geode"
+      TARGETS+=" x86-legacy"
+      TARGETS+=" ar71xx-mikrotik"
+      TARGETS+=" brcm2708-bcm2710"
+      TARGETS+=" mvebu-cortexa9"
     ;;
   esac
 fi
