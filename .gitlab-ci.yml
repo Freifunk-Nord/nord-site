@@ -4,6 +4,7 @@ variables:
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/freifunk-gluon/gluon.git
   GLUON_BRANCH: v2020.2.x
+  AU_BRANCH: stable
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
   DEPRECATED: 'upgrade'
@@ -49,20 +50,20 @@ build:
       # former clone step
     - set -x
     - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
-    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # We should never need this, should we?
-    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Apply patches
     - ./.gitlab-ci/patch.sh patches gluon
       # Build
-    - ./.gitlab-ci/build.sh -c build  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Revert patches
     - ./.gitlab-ci/patch.sh -r patches gluon
       # Bring gluon repo to cacheable state
-    - ./.gitlab-ci/build.sh -c clean  -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Sign (not in Nord)
     #- echo $SIGNING_KEY > signing_key
-    #- ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+    #- ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
@@ -81,7 +82,7 @@ upload:
     - ssh-add <(echo "$SSH_KEY")
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
-    - ./.gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
+    - ./.gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -a $AU_BRANCH -n $CI_PIPELINE_ID
   dependencies:
     - build
   cache: {}

@@ -38,9 +38,9 @@ usage() {
   echo ""
   echo "Build script for Freifunk-Fulda gluon firmware."
   echo ""
-  echo "-a: Autoupdater branch name (e.g. development)"
+  echo "-a: Autoupdater branch name (e.g. stable)"
   echo "    Default: branch (see -b)"
-  echo "-b: Firmware branch name (e.g. development)"
+  echo "-b: Firmware branch name (e.g. main)"
   echo "    Default: current git branch"
   echo "-c: Build command: update | clean | download | build | sign | upload | prepare"
   echo "-d: Enable bash debug output"
@@ -75,9 +75,6 @@ while getopts a:b:c:dhm:n:t:u:w:s: flag; do
         ;;
     b)
         BRANCH="${OPTARG}"
-	if [ "${BRANCH}" == "release-candidate" ] ; then
-          BRANCH="rc"
-	fi
         ;;
     c)
       case "${OPTARG}" in
@@ -162,11 +159,15 @@ if [[ -z "${BRANCH}" ]]; then
   BRANCH=${BRANCH:-HEAD}
 fi
 
+if [[ -z "$AU_BRANCH" ]]; then
+  AU_BRANCH="$BRANCH"
+fi
+
 # Default to build branch specific targets if parameter -t is not set 
 if [[ -z ${TARGETS+x} ]] ; then
   # Base targets we build
   TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand x86-64"
-  case "${BRANCH}" in
+  case "${AU_BRANCH}" in
     *)
       # all targets
       TARGETS+=" ath79-generic"
@@ -193,9 +194,9 @@ if [[ -z ${TARGETS+x} ]] ; then
   esac
 fi
 
-if [[ -z "$AU_BRANCH" ]]; then
-  AU_BRANCH="$BRANCH"
-fi
+# Normalize the branch name
+BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
+BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 
 if [[ -z "$UPLOAD_TARGET" ]]; then
   UPLOAD_TARGET="$BRANCH"
@@ -207,10 +208,6 @@ if [[ -z "${COMMAND}" ]]; then
   usage
   exit ${E_ILLEGAL_ARGS}
 fi
-
-# Normalize the branch name
-BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
-BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
@@ -312,12 +309,12 @@ build() {
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
        GLUON_RELEASE="${RELEASE}" \
-       GLUON_BRANCH="${BRANCH}" \
+       GLUON_BRANCH="${AU_BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
 
-  cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
-     "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
+  cp "${SITEDIR}/output/images/sysupgrade/${AU_BRANCH}.manifest" \
+     "${SITEDIR}/output/images/sysupgrade/${AU_BRANCH}.manifest.clean"
 
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
@@ -325,7 +322,7 @@ DATE=$(date '+%Y-%m-%d %H:%M:%S')
 VERSION=$(cat "${SITEDIR}/release")
 RELEASE=${RELEASE}
 BUILD=${BUILD}
-BRANCH=${BRANCH}
+BRANCH=${AU_BRANCH}
 COMMIT=${COMMIT}
 HOST=$(uname -n)
 EOF
@@ -337,7 +334,7 @@ sign() {
   # Add the signature to the local manifest
   contrib/sign.sh \
       "${SIGNKEY}" \
-      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
+      "${SITEDIR}/output/images/sysupgrade/${AU_BRANCH}.manifest"
 }
 
 upload() {
