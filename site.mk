@@ -61,6 +61,7 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
+	gluon-au-change
 #	gluon-config-mode-contact-info-anonymous-hint
 
 
