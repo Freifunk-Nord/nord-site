@@ -171,25 +171,25 @@ if [[ -z ${TARGETS+x} ]] ; then
     *)
       # all targets
       TARGETS+=" ath79-generic"
-      TARGETS+=" brcm2708-bcm2708"
-      TARGETS+=" brcm2708-bcm2709"
-      TARGETS+=" ipq40xx-generic"
-      TARGETS+=" ipq806x-generic"
-      TARGETS+=" lantiq-xrx200"
-      TARGETS+=" lantiq-xway"
-      TARGETS+=" mpc85xx-generic"
-      TARGETS+=" mpc85xx-p1020"
-      TARGETS+=" ramips-mt7620"
-      TARGETS+=" ramips-mt7621"
-      TARGETS+=" ramips-mt76x8" # Netgear R6120
-      TARGETS+=" ramips-rt305x"
-      TARGETS+=" sunxi-cortexa7"
-      TARGETS+=" x86-generic"
-      TARGETS+=" x86-geode"
-      TARGETS+=" x86-legacy"
-      TARGETS+=" ar71xx-mikrotik"
+      TARGETS+=" brcm2708-bcm2708" 
+      TARGETS+=" brcm2708-bcm2709" 
+      TARGETS+=" ipq40xx-generic" 
+      TARGETS+=" ipq806x-generic" 
+      TARGETS+=" lantiq-xrx200" 
+      TARGETS+=" lantiq-xway" 
+      TARGETS+=" mpc85xx-generic" 
+      TARGETS+=" mpc85xx-p1020" 
+      TARGETS+=" ramips-mt7620" 
+      TARGETS+=" ramips-mt7621" 
+      TARGETS+=" ramips-mt76x8" 
+      TARGETS+=" ramips-rt305x" 
+      TARGETS+=" sunxi-cortexa7" 
+      TARGETS+=" x86-generic" 
+      TARGETS+=" x86-geode" 
+      TARGETS+=" x86-legacy" 
+      TARGETS+=" ar71xx-mikrotik" 
       TARGETS+=" brcm2708-bcm2710" # raspi
-      TARGETS+=" mvebu-cortexa9" # linksys_wrt1200ac
+      #TARGETS+=" mvebu-cortexa9" # linksys_wrt1200ac
     ;;
   esac
 fi
