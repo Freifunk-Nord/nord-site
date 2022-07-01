@@ -19,6 +19,7 @@ BEFORE_SCRIPT = [
 	"apt-get install -y curl git libncurses-dev build-essential make gawk unzip wget python2.7 file tar bzip2 tree ccache ecdsautils > /dev/null",
 	"mkdir -p ccache",
 	'PATH="/usr/lib/ccache:$PATH"',
+	'git -C gluon fetch --tags',
 ]
 
 VARIABLES = {
